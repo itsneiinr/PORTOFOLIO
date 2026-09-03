@@ -123,6 +123,7 @@
                 { name: 'About', href: '#about' },
                 { name: 'Education', href: '#education' },
                 { name: 'Experience', href: '#experience' },
+                { name: 'Sertifikat', href: '#certificates' },
                 { name: 'Projects', href: '#projects' },
             ];
 
@@ -446,6 +447,279 @@
             );
         };
 
+        const Certificates = () => {
+            const [selectedCategory, setSelectedCategory] = React.useState("Semua");
+            const [selectedCert, setSelectedCert] = React.useState(null);
+            const [certIndex, setCertIndex] = React.useState(0);
+
+            const certData = [
+                {
+                    title: "MikroTik Certified Network Associate (MTCNA)",
+                    issuer: "MikroTik Academy",
+                    year: "2025",
+                    category: "Sertifikasi Technical",
+                    image: "./images/sertifikat/SERTIFIKAT-MTCNA.png",
+                    pdf: "./images/sertifikat/SERTIFIKAT-MTCNA.pdf",
+                    desc: "Sertifikasi internasional keahlian jaringan komputer, konfigurasi router, routing, firewall, dan manajemen jaringan MikroTik."
+                },
+                {
+                    title: "Intermediate Assistant Web Developer",
+                    issuer: "Vocational Bootcamp - PNC",
+                    year: "2025",
+                    category: "Sertifikasi Technical",
+                    image: "./images/sertifikat/Sertifikat_Intermediate Assistant Web Developer - VBL - Politeknik Negeri Cilacap.png",
+                    pdf: "./images/sertifikat/Sertifikat_Intermediate Assistant Web Developer - VBL - Politeknik Negeri Cilacap.pdf",
+                    desc: "Sertifikasi keahlian tingkat lanjut pengembangan aplikasi web modern, arsitektur MVC, database, dan integrasi backend."
+                },
+                {
+                    title: "Fundamental of Assistant Web Developer",
+                    issuer: "Vocational Bootcamp - PNC",
+                    year: "2024",
+                    category: "Sertifikasi Technical",
+                    image: "./images/sertifikat/Sertifikat_Fundamental of Assistant Web Developer - VBL - Politeknik Negeri Cilacap.png",
+                    pdf: "./images/sertifikat/Sertifikat_Fundamental of Assistant Web Developer - VBL - Politeknik Negeri Cilacap.pdf",
+                    desc: "Sertifikasi dasar-dasar pemrograman web, struktur HTML5, styling CSS3, JavaScript, dan logika pemrograman web."
+                },
+                {
+                    title: "Panitia Duta Kampus Politeknik Negeri Cilacap 2026",
+                    issuer: "BEM PNC | Divisi Media",
+                    year: "2026",
+                    category: "Kepanitiaan & Program",
+                    image: "./images/sertifikat/Sertifikat-DUTKAM26.png",
+                    pdf: "./images/sertifikat/Sertifikat-DUTKAM26.pdf",
+                    desc: "Sertifikat partisipasi dan kepanitiaan dalam penyelenggaraan program kerja Badan Eksekutif Mahasiswa Politeknik Negeri Cilacap Duta Kampus PNC 2026."
+                },
+                {
+                    title: "Panitia Forumpuan Bicara",
+                    issuer: "BEM PNC | Divisi Media",
+                    year: "2025",
+                    category: "Kepanitiaan & Program",
+                    image: "./images/sertifikat/Sertifikat-FORUMPUAN.png",
+                    pdf: "./images/sertifikat/Sertifikat-FORUMPUAN.pdf",
+                    desc: "Sertifikat partisipasi dan kepanitiaan dalam penyelenggaraan program kerja Badan Eksekutif Mahasiswa Politeknik Negeri Cilacap Forumpuan Bicara."
+                },
+                {
+                    title: "Panitia Mogerak",
+                    issuer: "BEM PNC | Divisi Acara",
+                    year: "2025",
+                    category: "Kepanitiaan & Program",
+                    image: "./images/sertifikat/Sertifikat-MOGERAK.png",
+                    pdf: "./images/sertifikat/Sertifikat-MOGERAK.pdf",
+                    desc: "Sertifikat partisipasi dan kepanitiaan dalam penyelenggaraan program kerja Badan Eksekutif Mahasiswa Politeknik Negeri Cilacap Mogerak."
+                },
+                {
+                    title: "Pengantar Mindset Digital 1",
+                    issuer: "Pelatihan Digital",
+                    year: "2024",
+                    category: "Sertifikasi Technical",
+                    image: "./images/sertifikat/Sertifikat_Pengantar Mindset Digital 1 _ Mengubah Masa Depan Anda Dengan Pola Pikir Digital.png",
+                    pdf: "./images/sertifikat/Sertifikat_Pengantar Mindset Digital 1 _ Mengubah Masa Depan Anda Dengan Pola Pikir Digital.pdf",
+                    desc: "Sertifikat kompetensi transformasi digital, adaptasi teknologi, dan pemahaman pola pikir inovatif di era digital."
+                }
+            ];
+
+            const categories = ["Semua", "Sertifikasi Technical", "Kepanitiaan & Program"];
+
+            const filteredCertificates = selectedCategory === "Semua"
+                ? certData
+                : certData.filter(cert => cert.category === selectedCategory);
+
+            const openModal = (cert, index) => {
+                setSelectedCert(cert);
+                setCertIndex(index);
+            };
+
+            const nextCert = () => {
+                const nextIdx = (certIndex + 1) % filteredCertificates.length;
+                setCertIndex(nextIdx);
+                setSelectedCert(filteredCertificates[nextIdx]);
+            };
+
+            const prevCert = () => {
+                const prevIdx = (certIndex - 1 + filteredCertificates.length) % filteredCertificates.length;
+                setCertIndex(prevIdx);
+                setSelectedCert(filteredCertificates[prevIdx]);
+            };
+
+            return (
+                <section id="certificates" className="py-24 relative overflow-hidden">
+                    <div className="container mx-auto px-6 md:px-12">
+                        <div className="text-center mb-16">
+                            <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mb-4">
+                                Sertifikat & <span className="gradient-text">Kepanitiaan</span>
+                            </h2>
+                            <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-8"></div>
+                            <p className="text-slate-400 max-w-2xl mx-auto text-base">
+                                Dokumentasi pencapaian kompetensi teknis, pelatihan profesional, serta pengalaman kepanitiaan organisasi.
+                            </p>
+
+                            {/* Category Filter Pills */}
+                            <div className="flex flex-wrap justify-center gap-3 mt-8">
+                                {categories.map((cat) => (
+                                    <button
+                                        key={cat}
+                                        onClick={() => setSelectedCategory(cat)}
+                                        className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedCategory === cat
+                                                ? 'bg-primary text-white shadow-[0_0_15px_rgba(79,70,229,0.5)] scale-105'
+                                                : 'glass text-slate-400 hover:text-white hover:bg-white/10'
+                                            }`}
+                                    >
+                                        {cat}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Certificate Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {filteredCertificates.map((cert, index) => (
+                                <div
+                                    key={index}
+                                    className="glass-card rounded-2xl overflow-hidden group cursor-pointer hover:-translate-y-2 transition-all duration-300 border border-white/5 hover:border-primary/40 shadow-xl flex flex-col justify-between"
+                                    onClick={() => openModal(cert, index)}
+                                >
+                                    <div>
+                                        {/* Image Box */}
+                                        <div className="relative h-52 overflow-hidden bg-slate-900/80">
+                                            <img
+                                                src={cert.image}
+                                                alt={cert.title}
+                                                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                                            />
+                                            <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                                                <span className="text-white font-medium bg-primary/90 px-4 py-2 rounded-full text-xs tracking-wider shadow-lg flex items-center gap-2">
+                                                    <i className="fa-solid fa-expand"></i> Pratinjau Sertifikat
+                                                </span>
+                                            </div>
+                                            <span className="absolute top-3 right-3 text-xs font-semibold px-3 py-1 rounded-full bg-slate-900/90 text-primary border border-primary/30 backdrop-blur-md">
+                                                {cert.year}
+                                            </span>
+                                        </div>
+
+                                        {/* Content Box */}
+                                        <div className="p-6">
+                                            <div className="text-xs font-medium text-emerald-400 mb-2 flex items-center gap-1.5">
+                                                <i className="fa-solid fa-award"></i>
+                                                <span>{cert.issuer}</span>
+                                            </div>
+                                            <h3 className="text-lg font-bold text-white mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                                                {cert.title}
+                                            </h3>
+                                            <p className="text-slate-400 text-sm leading-relaxed line-clamp-2 mb-4">
+                                                {cert.desc}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Card Footer */}
+                                    <div className="px-6 pb-6 pt-0 flex justify-between items-center text-xs text-slate-400 border-t border-white/5 mt-auto">
+                                        <span className="bg-primary/10 text-primary px-2.5 py-1 rounded-md border border-primary/20">
+                                            {cert.category}
+                                        </span>
+                                        <span className="group-hover:text-primary transition-colors flex items-center gap-1 font-medium">
+                                            Detail <i className="fa-solid fa-arrow-right text-[10px]"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* MODAL PREVIEW */}
+                    {selectedCert && (
+                        <div
+                            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 animate-fadeIn"
+                            onClick={() => setSelectedCert(null)}
+                        >
+                            <div
+                                className="relative max-w-4xl w-full glass-card rounded-2xl overflow-hidden border border-white/10 shadow-2xl p-6 md:p-8"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                {/* Close Button */}
+                                <button
+                                    onClick={() => setSelectedCert(null)}
+                                    className="absolute top-4 right-4 text-slate-400 hover:text-white text-2xl w-10 h-10 rounded-full glass flex items-center justify-center transition-colors z-20"
+                                >
+                                    &times;
+                                </button>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                                    {/* Left: Image Container with Nav */}
+                                    <div className="relative group rounded-xl overflow-hidden bg-slate-950 border border-white/10">
+                                        <img
+                                            src={selectedCert.image}
+                                            alt={selectedCert.title}
+                                            className="w-full max-h-[60vh] object-contain rounded-xl"
+                                        />
+
+                                        {filteredCertificates.length > 1 && (
+                                            <>
+                                                <button
+                                                    onClick={prevCert}
+                                                    className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 text-white hover:bg-primary flex items-center justify-center transition-colors text-lg"
+                                                    title="Sertifikat Sebelumnya"
+                                                >
+                                                    ‹
+                                                </button>
+                                                <button
+                                                    onClick={nextCert}
+                                                    className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 text-white hover:bg-primary flex items-center justify-center transition-colors text-lg"
+                                                    title="Sertifikat Selanjutnya"
+                                                >
+                                                    ›
+                                                </button>
+                                            </>
+                                        )}
+                                    </div>
+
+                                    {/* Right: Info & Actions */}
+                                    <div className="flex flex-col justify-between space-y-6">
+                                        <div>
+                                            <div className="flex items-center gap-3 mb-3">
+                                                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/20 text-primary border border-primary/30">
+                                                    {selectedCert.category}
+                                                </span>
+                                                <span className="text-xs text-slate-400 font-medium">
+                                                    <i className="fa-regular fa-calendar-alt mr-1"></i> {selectedCert.year}
+                                                </span>
+                                            </div>
+
+                                            <h3 className="text-2xl font-bold font-heading text-white mb-2 leading-snug">
+                                                {selectedCert.title}
+                                            </h3>
+                                            <p className="text-emerald-400 font-medium text-sm mb-4">
+                                                <i className="fa-solid fa-award mr-1.5"></i> Penerbit: {selectedCert.issuer}
+                                            </p>
+                                            <p className="text-slate-300 text-sm leading-relaxed bg-slate-900/60 p-4 rounded-xl border border-white/5">
+                                                {selectedCert.desc}
+                                            </p>
+                                        </div>
+
+                                        <div className="flex flex-wrap gap-4 pt-2">
+                                            <a
+                                                href={selectedCert.pdf}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="px-6 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-indigo-500 transition-all text-sm flex items-center gap-2 shadow-lg shadow-indigo-600/30"
+                                            >
+                                                <i className="fa-solid fa-file-pdf"></i> Buka Dokumen PDF
+                                            </a>
+                                            <button
+                                                onClick={() => setSelectedCert(null)}
+                                                className="px-6 py-2.5 rounded-full glass text-slate-300 font-medium hover:text-white hover:bg-white/10 transition-all text-sm"
+                                            >
+                                                Tutup
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </section>
+            );
+        };
+
         const Projects = () => {
             // State untuk mengatur modal galeri
             const [selectedProject, setSelectedProject] = React.useState(null);
@@ -610,6 +884,7 @@
                         <About />
                         <Education />
                         <Experience />
+                        <Certificates />
                         <Projects />
                     </main>
                     <Footer />
