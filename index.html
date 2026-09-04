@@ -4,7 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio | Itsneinfah Nur Iffatun</title>
+    <title>Itsneinfah Nur Iffatun | Portofolio Mahasiswa Teknik Informatika & Full-Stack Developer</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Portofolio Itsneinfah Nur Iffatun - Mahasiswa D3 Teknik Informatika Politeknik Negeri Cilacap. Full-Stack Developer (PHP CodeIgniter, Laravel) & UI/UX Designer (Figma). Siap magang dan bekerja.">
+    <meta name="keywords"
+        content="Itsneinfah Nur Iffatun, Portofolio, Teknik Informatika, Full Stack Developer, UI UX Designer, CodeIgniter, Laravel, Flutter, Politeknik Negeri Cilacap, Web Developer">
+    <meta name="author" content="Itsneinfah Nur Iffatun">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Itsneinfah Nur Iffatun | Portofolio Teknik Informatika & Full-Stack Developer">
+    <meta property="og:description"
+        content="Portofolio Itsneinfah Nur Iffatun - Full-Stack Developer & UI/UX Designer. Mahasiswa D3 Teknik Informatika Politeknik Negeri Cilacap.">
+    <meta property="og:image" content="./Itsneinfah%20Nur%20Iffatun.jpeg">
+    <meta property="og:url" content="https://github.com/itsneiinr">
+
+    <!-- Inline SVG Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%234F46E5'/><text x='50' y='65' font-size='50' font-weight='bold' text-anchor='middle' fill='white' font-family='sans-serif'>INI</text></svg>">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +33,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
-    <!-- Font Awesome -->
+    <!-- Font Awesome 6.4.0 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Tailwind CSS -->
@@ -28,9 +48,9 @@
                         heading: ['Outfit', 'sans-serif'],
                     },
                     colors: {
-                        primary: '#4F46E5', // Indigo 600
+                        primary: '#4F46E5',   // Indigo 600
                         secondary: '#10B981', // Emerald 500
-                        dark: '#0F172A', // Slate 900
+                        dark: '#0F172A',      // Slate 900
                     }
                 }
             }
@@ -43,6 +63,7 @@
             font-family: 'Inter', sans-serif;
             background-color: #0B0F19;
             color: #F8FAFC;
+            overflow-x: hidden;
         }
 
         h1,
@@ -56,29 +77,47 @@
         }
 
         .glass {
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .glass-card {
             background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5);
         }
 
         .gradient-text {
-            background: linear-gradient(to right, #6366F1, #A855F7);
+            background: linear-gradient(to right, #6366F1, #A855F7, #EC4899);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.25s ease-out forwards;
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
+            height: 8px;
         }
 
         ::-webkit-scrollbar-track {
@@ -106,16 +145,16 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useCallback } = React;
 
-        // --- COMPONENTS ---
-        const Navbar = () => {
+        // --- COMPONENT: NAVBAR ---
+        const Navbar = ({ onOpenCV }) => {
             const [scrolled, setScrolled] = useState(false);
             const [isOpen, setIsOpen] = useState(false);
 
             useEffect(() => {
                 const handleScroll = () => {
-                    setScrolled(window.scrollY > 50);
+                    setScrolled(window.scrollY > 40);
                 };
                 window.addEventListener('scroll', handleScroll);
                 return () => window.removeEventListener('scroll', handleScroll);
@@ -124,95 +163,180 @@
             const navLinks = [
                 { name: 'Home', href: '#home' },
                 { name: 'About', href: '#about' },
+                { name: 'Skills', href: '#skills' },
                 { name: 'Education', href: '#education' },
                 { name: 'Experience', href: '#experience' },
-                { name: 'Sertifikat', href: '#certificates' },
                 { name: 'Projects', href: '#projects' },
+                { name: 'Certificates', href: '#certificates' },
+                { name: 'Contact', href: '#contact' },
             ];
 
             return (
-                <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'glass py-4 shadow-xl' : 'py-6 bg-transparent'}`}>
+                <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'glass py-3 shadow-2xl border-b border-white/10' : 'py-5 bg-transparent'}`}>
                     <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-                        <a href="#home" className="text-2xl font-heading font-bold text-white tracking-wider">
-                            INI<span className="text-primary">.</span>
+                        <a href="#home" className="text-2xl font-heading font-bold text-white tracking-wider flex items-center gap-1 group">
+                            <span>INI</span><span className="text-primary group-hover:text-purple-400 transition-colors">.</span>
                         </a>
 
                         {/* Desktop Nav */}
-                        <div className="hidden md:flex space-x-8">
+                        <div className="hidden lg:flex items-center space-x-6">
                             {navLinks.map((link) => (
-                                <a key={link.name} href={link.href} className="text-sm font-medium text-slate-300 hover:text-white transition-colors relative group">
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    className="text-xs font-medium uppercase tracking-wider text-slate-300 hover:text-white transition-colors relative group py-1"
+                                >
                                     {link.name}
-                                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-purple-500 transition-all duration-300 group-hover:w-full"></span>
                                 </a>
                             ))}
+
+                            {/* Download CV CTA */}
+                            {/* NOTE: Gantilah file path './cv.pdf' jika Anda telah memiliki file CV PDF fisik */}
+                            <a
+                                href="./cv.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-4 py-2 rounded-full bg-primary/90 hover:bg-primary text-white text-xs font-semibold tracking-wide transition-all shadow-md hover:shadow-indigo-500/30 flex items-center gap-1.5 transform hover:-translate-y-0.5"
+                                title="Download Curriculm Vitae (CV)"
+                            >
+                                <i className="fa-solid fa-download"></i> Download CV
+                            </a>
                         </div>
 
                         {/* Mobile Toggle */}
-                        <button className="md:hidden text-2xl text-white focus:outline-none" onClick={() => setIsOpen(!isOpen)}>
+                        <button
+                            className="lg:hidden text-2xl text-white focus:outline-none p-2 rounded-lg hover:bg-white/5 transition-colors"
+                            onClick={() => setIsOpen(!isOpen)}
+                            aria-label={isOpen ? "Tutup Menu Navigation" : "Buka Menu Navigation"}
+                        >
                             <i className={`fa-solid ${isOpen ? 'fa-xmark' : 'fa-bars'}`}></i>
                         </button>
                     </div>
 
-                    {/* Mobile Nav */}
+                    {/* Mobile Nav Drawer */}
                     {isOpen && (
-                        <div className="md:hidden glass absolute top-full left-0 w-full py-4 px-6 flex flex-col space-y-4 shadow-xl border-t border-white/10 mt-4">
+                        <div className="lg:hidden glass absolute top-full left-0 w-full py-6 px-8 flex flex-col space-y-4 shadow-2xl border-t border-white/10 mt-2 animate-fadeIn">
                             {navLinks.map((link) => (
-                                <a key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="text-base font-medium text-slate-200 hover:text-white">
-                                    {link.name}
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={() => setIsOpen(false)}
+                                    className="text-sm font-medium text-slate-200 hover:text-primary transition-colors py-1 flex items-center justify-between"
+                                >
+                                    <span>{link.name}</span>
+                                    <i className="fa-solid fa-chevron-right text-[10px] opacity-40"></i>
                                 </a>
                             ))}
+                            <div className="pt-3 border-t border-white/10">
+                                {/* Path placeholder CV untuk mobile */}
+                                <a
+                                    href="./cv.pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => setIsOpen(false)}
+                                    className="w-full py-2.5 rounded-xl bg-primary text-white text-xs font-semibold tracking-wide text-center flex items-center justify-center gap-2 shadow-lg"
+                                >
+                                    <i className="fa-solid fa-download"></i> Download CV
+                                </a>
+                            </div>
                         </div>
                     )}
                 </nav>
             );
         };
 
+        // --- COMPONENT: HERO ---
         const Hero = () => {
             return (
-                <section id="home" className="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden bg-slate-950">
-                    {/* Background glow */}
-                    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] pointer-events-none"></div>
-                    <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px] pointer-events-none"></div>
+                <section id="home" className="min-h-screen flex items-center justify-center pt-24 pb-16 relative overflow-hidden bg-slate-950">
+                    {/* Background glow animations */}
+                    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[130px] pointer-events-none"></div>
+                    <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[130px] pointer-events-none"></div>
 
-                    <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
-                        <div className="order-2 md:order-1 flex flex-col space-y-6 text-center md:text-left">
-                            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass border border-white/10 shadow-sm w-max mx-auto md:mx-0">
-                                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                                <span className="text-xs font-medium text-slate-300">Available for Work</span>
+                    <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+                        <div className="order-2 lg:order-1 flex flex-col space-y-6 text-center lg:text-left">
+                            {/* Status Badge */}
+                            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full glass border border-emerald-500/30 shadow-md w-max mx-auto lg:mx-0">
+                                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]"></span>
+                                <span className="text-xs font-semibold text-emerald-300 tracking-wide">Open to Internship & Freelance Opportunities</span>
                             </div>
+
                             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading leading-tight text-white">
                                 Hi, Saya <br />
                                 <span className="gradient-text">Itsneinfah Nur Iffatun.</span>
                             </h1>
-                            <p className="text-lg text-slate-400 max-w-lg mx-auto md:mx-0 leading-relaxed">
-                                Mahasiswa Teknik Informatika & Full-Stack Developer yang fokus pada solusi digital fungsional dan UI/UX yang estetis.
+
+                            <p className="text-base md:text-lg text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                                Mahasiswa Teknik Informatika & Full-Stack Developer yang berfokus pada pengembangan sistem web dinamis, arsitektur database, dan perancangan UI/UX yang intuitif.
                             </p>
-                            <div className="flex flex-wrap gap-4 justify-center md:justify-start pt-4">
-                                <a href="#projects" className="px-8 py-3 rounded-full bg-primary text-white font-medium hover:bg-indigo-600 transition-all shadow-[0_4px_20px_rgba(79,70,229,0.4)] hover:shadow-[0_6px_25px_rgba(79,70,229,0.6)] transform hover:-translate-y-1">
-                                    Lihat Proyek
+
+                            {/* CTAs */}
+                            <div className="flex flex-wrap gap-4 justify-center lg:justify-start pt-2">
+                                <a
+                                    href="#projects"
+                                    className="px-7 py-3 rounded-full bg-primary text-white text-sm font-semibold hover:bg-indigo-600 transition-all shadow-[0_4px_20px_rgba(79,70,229,0.4)] hover:shadow-[0_6px_25px_rgba(79,70,229,0.6)] transform hover:-translate-y-0.5 flex items-center gap-2"
+                                >
+                                    <i className="fa-solid fa-code"></i> Lihat Proyek
                                 </a>
-                                <a href="#about" className="px-8 py-3 rounded-full glass border border-white/10 text-white font-medium hover:bg-white/10 transition-all transform hover:-translate-y-1 shadow-sm">
-                                    Tentang Saya
+                                {/* Placeholder link ke CV */}
+                                <a
+                                    href="./cv.pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-7 py-3 rounded-full glass border border-white/15 text-white text-sm font-semibold hover:bg-white/10 transition-all shadow-md transform hover:-translate-y-0.5 flex items-center gap-2"
+                                >
+                                    <i className="fa-solid fa-file-arrow-down"></i> Download CV
                                 </a>
                             </div>
-                            <div className="flex gap-4 mt-8 justify-center md:justify-start">
-                                <a href="https://github.com/itsneiinr" target="_blank" className="text-slate-400 hover:text-white transition-colors text-2xl">
+
+                            {/* Social Media Links */}
+                            <div className="flex items-center gap-5 mt-6 justify-center lg:justify-start pt-2">
+                                <span className="text-xs text-slate-400 uppercase tracking-widest font-semibold mr-1">Socials:</span>
+                                <a
+                                    href="https://github.com/itsneiinr"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-10 h-10 rounded-full glass flex items-center justify-center text-slate-300 hover:text-white hover:bg-primary transition-all shadow-md text-lg transform hover:scale-110"
+                                    aria-label="GitHub Profile"
+                                    title="GitHub Profile"
+                                >
                                     <i className="fa-brands fa-github"></i>
                                 </a>
-                                <a href="https://linkedin.com/in/itsneinfah-nur-iffatun" target="_blank" className="text-slate-400 hover:text-white transition-colors text-2xl">
+                                <a
+                                    href="https://linkedin.com/in/itsneinfah-nur-iffatun"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-10 h-10 rounded-full glass flex items-center justify-center text-slate-300 hover:text-white hover:bg-primary transition-all shadow-md text-lg transform hover:scale-110"
+                                    aria-label="LinkedIn Profile"
+                                    title="LinkedIn Profile"
+                                >
                                     <i className="fa-brands fa-linkedin"></i>
                                 </a>
-                                <a href="https://instagram.com/itsneiinr" target="_blank" className="text-slate-400 hover:text-white transition-colors text-2xl">
+                                <a
+                                    href="https://instagram.com/itsneiinr"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-10 h-10 rounded-full glass flex items-center justify-center text-slate-300 hover:text-white hover:bg-primary transition-all shadow-md text-lg transform hover:scale-110"
+                                    aria-label="Instagram Profile"
+                                    title="Instagram Profile"
+                                >
                                     <i className="fa-brands fa-instagram"></i>
                                 </a>
                             </div>
                         </div>
-                        <div className="order-1 md:order-2 flex justify-center md:justify-end">
+
+                        {/* Profile Image Frame */}
+                        <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
                             <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
-                                <div className="absolute inset-0 rounded-full border-2 border-primary/30 animate-[spin_10s_linear_infinite]"></div>
-                                <div className="absolute inset-4 rounded-full border-2 border-purple-500/30 animate-[spin_15s_linear_infinite_reverse]"></div>
+                                <div className="absolute inset-0 rounded-full border-2 border-primary/40 animate-[spin_12s_linear_infinite]"></div>
+                                <div className="absolute inset-4 rounded-full border-2 border-purple-500/40 animate-[spin_18s_linear_infinite_reverse]"></div>
                                 <div className="absolute inset-8 rounded-full overflow-hidden border-4 border-slate-800 bg-slate-900 shadow-2xl">
-                                    <img src="Itsneinfah%20Nur%20Iffatun.jpeg" alt="Itsneinfah Nur Iffatun" className="w-full h-full object-cover" />
+                                    <img
+                                        src="Itsneinfah%20Nur%20Iffatun.jpeg"
+                                        alt="Itsneinfah Nur Iffatun - Foto Profil"
+                                        className="w-full h-full object-cover"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -221,99 +345,63 @@
             );
         };
 
+        // --- COMPONENT: ABOUT ---
         const About = () => {
             return (
-                <section id="about" className="py-24 relative">
+                <section id="about" className="py-24 relative bg-slate-900/40">
                     <div className="container mx-auto px-6 md:px-12">
                         <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mb-4">About <span className="gradient-text">Me</span></h2>
+                            <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mb-4">
+                                About <span className="gradient-text">Me</span>
+                            </h2>
                             <div className="w-20 h-1 bg-primary mx-auto rounded-full"></div>
                         </div>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                            <div className="glass-card rounded-2xl p-8 md:p-10 shadow-xl relative overflow-hidden group border border-white/5">
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
-                                <i className="fa-solid fa-quote-left text-4xl text-primary/30 mb-6"></i>
-                                <p className="text-slate-300 leading-relaxed text-lg mb-6">
-                                    Saya adalah Mahasiswa Teknik Informatika yang berdedikasi dalam menciptakan solusi digital yang fungsional dan estetis. Dengan keahlian di bidang <span className="text-white font-medium">Full-Stack Development (PHP/CodeIgniter)</span> dan <span className="text-white font-medium">UI/UX Design (Figma)</span>, saya fokus membangun sistem yang tidak hanya bekerja dengan baik di sisi teknis, tapi juga memberikan pengalaman pengguna yang luar biasa.
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                            {/* Main Bio Glass Box */}
+                            <div className="lg:col-span-7 glass-card rounded-2xl p-8 md:p-10 shadow-xl relative overflow-hidden border border-white/10">
+                                <div className="absolute top-0 right-0 w-36 h-36 bg-primary/10 rounded-bl-full -z-10"></div>
+                                <i className="fa-solid fa-quote-left text-4xl text-primary/40 mb-6 block"></i>
+                                <p className="text-slate-300 leading-relaxed text-base md:text-lg mb-6">
+                                    Saya adalah Mahasiswa <span className="text-white font-semibold">Teknik Informatika</span> di Politeknik Negeri Cilacap yang memiliki ketertarikan mendalam dalam menciptakan aplikasi web yang terstruktur, fungsional, dan estetis.
                                 </p>
-                                <p className="text-slate-300 leading-relaxed text-lg">
-                                    Saya percaya bahwa disiplin dan kemampuan adaptasi adalah kunci untuk terus berkembang di industri teknologi.
+                                <p className="text-slate-300 leading-relaxed text-base md:text-lg mb-6">
+                                    Fokus utama saya meliputi <span className="text-white font-semibold">Full-Stack Development (PHP, CodeIgniter, Laravel)</span> serta <span className="text-white font-semibold">UI/UX Design (Figma)</span>. Saya terbiasa merancang alur sistem dari sisi basis data hingga antarmuka visual akhir.
+                                </p>
+                                <p className="text-slate-300 leading-relaxed text-base md:text-lg">
+                                    Berpengalaman aktif dalam organisasi mahasiswa dan kepanitiaan, saya memiliki kemampuan adaptasi yang baik, komunikasi efektif, serta siap berkontribusi dalam tim magang atau posisi Junior Web / Full-Stack Developer.
                                 </p>
                             </div>
 
-                            <div className="space-y-6">
-                                <h3 className="text-2xl font-bold font-heading text-white mb-6">Skill Highlight</h3>
-
-                                {/* Skill 1: Development */}
-                                <div className="glass-card p-6 rounded-2xl flex flex-col md:flex-row items-start gap-4 hover:-translate-y-1 transition-all border-l-4 border-l-blue-500 shadow-lg border border-white/5">
-                                    <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 text-xl shrink-0">
-                                        <i className="fa-solid fa-code"></i>
+                            {/* Side Highlights Cards */}
+                            <div className="lg:col-span-5 space-y-4">
+                                <div className="glass-card p-6 rounded-2xl border-l-4 border-l-primary flex items-start gap-4 hover:-translate-y-1 transition-transform">
+                                    <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary text-xl shrink-0">
+                                        <i className="fa-solid fa-graduation-cap"></i>
                                     </div>
-                                    <div className="w-full">
-                                        <h4 className="text-white font-semibold text-lg mb-3">Development (Coding)</h4>
-                                        <div className="flex flex-wrap gap-2">
-                                            {[
-                                                "PHP (CodeIgniter, Laravel)",
-                                                "C# (Windows Forms, N-tier Architecture)",
-                                                "HTML/CSS",
-                                                "JavaScript",
-                                                "MySQL",
-                                                "MariaDB",
-                                                "Oracle SQL",
-                                                "Flutter",
-                                                "Git Version Control",
-                                                "MikroTik & Winbox Configuration"
-                                            ].map((skill, i) => (
-                                                <span key={i} className="px-3 py-1.5 text-xs font-medium rounded-lg bg-blue-500/10 text-blue-300 border border-blue-500/20 hover:bg-blue-500/20 hover:text-white hover:border-blue-400 hover:scale-105 transition-all duration-200 cursor-default shadow-sm">
-                                                    {skill}
-                                                </span>
-                                            ))}
-                                        </div>
+                                    <div>
+                                        <h3 className="text-white font-semibold text-base mb-1">Pendidikan Akademik</h3>
+                                        <p className="text-slate-400 text-sm">D3 Teknik Informatika - Politeknik Negeri Cilacap (Mahasiswa Aktif)</p>
                                     </div>
                                 </div>
 
-                                {/* Skill 2: Design & UI/UX */}
-                                <div className="glass-card p-6 rounded-2xl flex flex-col md:flex-row items-start gap-4 hover:-translate-y-1 transition-all border-l-4 border-l-pink-500 shadow-lg border border-white/5">
-                                    <div className="w-12 h-12 rounded-xl bg-pink-500/20 flex items-center justify-center text-pink-400 text-xl shrink-0">
-                                        <i className="fa-solid fa-pen-nib"></i>
+                                <div className="glass-card p-6 rounded-2xl border-l-4 border-l-purple-500 flex items-start gap-4 hover:-translate-y-1 transition-transform">
+                                    <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400 text-xl shrink-0">
+                                        <i className="fa-solid fa-layer-group"></i>
                                     </div>
-                                    <div className="w-full">
-                                        <h4 className="text-white font-semibold text-lg mb-3">Design & UI/UX</h4>
-                                        <div className="flex flex-wrap gap-2">
-                                            {[
-                                                "UI/UX Design (Figma)",
-                                                "Visual Branding",
-                                                "Content Creation",
-                                                "Graphic Design"
-                                            ].map((skill, i) => (
-                                                <span key={i} className="px-3 py-1.5 text-xs font-medium rounded-lg bg-pink-500/10 text-pink-300 border border-pink-500/20 hover:bg-pink-500/20 hover:text-white hover:border-pink-400 hover:scale-105 transition-all duration-200 cursor-default shadow-sm">
-                                                    {skill}
-                                                </span>
-                                            ))}
-                                        </div>
+                                    <div>
+                                        <h3 className="text-white font-semibold text-base mb-1">Pengembangan Web & UI/UX</h3>
+                                        <p className="text-slate-400 text-sm">Menguasai PHP (CodeIgniter/Laravel), MySQL, JavaScript, dan Figma Prototyping.</p>
                                     </div>
                                 </div>
 
-                                {/* Skill 3: Soft Skills */}
-                                <div className="glass-card p-6 rounded-2xl flex flex-col md:flex-row items-start gap-4 hover:-translate-y-1 transition-all border-l-4 border-l-emerald-500 shadow-lg border border-white/5">
+                                <div className="glass-card p-6 rounded-2xl border-l-4 border-l-emerald-500 flex items-start gap-4 hover:-translate-y-1 transition-transform">
                                     <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-xl shrink-0">
-                                        <i className="fa-solid fa-users"></i>
+                                        <i className="fa-solid fa-people-group"></i>
                                     </div>
-                                    <div className="w-full">
-                                        <h4 className="text-white font-semibold text-lg mb-3">Soft Skills</h4>
-                                        <div className="flex flex-wrap gap-2">
-                                            {[
-                                                "Komunikasi Efektif",
-                                                "Manajemen Proyek",
-                                                "Kerja Sama Tim",
-                                                "Kemampuan Adaptasi"
-                                            ].map((skill, i) => (
-                                                <span key={i} className="px-3 py-1.5 text-xs font-medium rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 hover:bg-emerald-500/20 hover:text-white hover:border-emerald-400 hover:scale-105 transition-all duration-200 cursor-default shadow-sm">
-                                                    {skill}
-                                                </span>
-                                            ))}
-                                        </div>
+                                    <div>
+                                        <h3 className="text-white font-semibold text-base mb-1">Organisasi & Adaptabilitas</h3>
+                                        <p className="text-slate-400 text-sm">Pengurus BEM PNC Kominfo, terbiasa berkolaborasi dan manajemen waktu yang terstruktur.</p>
                                     </div>
                                 </div>
                             </div>
@@ -323,39 +411,246 @@
             );
         };
 
+        // --- COMPONENT: WHAT I DO ---
+        const WhatIDo = () => {
+            const services = [
+                {
+                    icon: "fa-solid fa-laptop-code",
+                    title: "Web Development",
+                    badge: "Backend & Frontend",
+                    color: "from-blue-500/20 to-indigo-500/10 border-blue-500/30 text-blue-400",
+                    skills: ["PHP", "CodeIgniter", "Laravel", "JavaScript", "HTML & CSS"],
+                    desc: "Pengembangan sistem aplikasi web dinamis dengan struktur kode bersih (clean code) dan arsitektur MVC yang andal."
+                },
+                {
+                    icon: "fa-solid fa-pen-ruler",
+                    title: "UI/UX Design",
+                    badge: "User Centered",
+                    color: "from-pink-500/20 to-purple-500/10 border-pink-500/30 text-pink-400",
+                    skills: ["Figma", "Wireframing", "Prototyping", "User Interface"],
+                    desc: "Perancangan antarmuka visual yang modern, konsisten, intuitif, dan responsif dari ide awal hingga prototype interaktif."
+                },
+                {
+                    icon: "fa-solid fa-mobile-screen-button",
+                    title: "Mobile Development",
+                    badge: "Cross Platform",
+                    color: "from-purple-500/20 to-indigo-500/10 border-purple-500/30 text-purple-400",
+                    skills: ["Flutter", "API Integration", "Dart"],
+                    desc: "Pembuatan tampilan dan logika dasar aplikasi mobile responsif yang terintegrasi dengan RESTful API backend."
+                },
+                {
+                    icon: "fa-solid fa-server",
+                    title: "Database & Networking",
+                    badge: "Infrastructure",
+                    color: "from-emerald-500/20 to-teal-500/10 border-emerald-500/30 text-emerald-400",
+                    skills: ["MySQL", "MariaDB", "Oracle SQL", "MikroTik"],
+                    desc: "Perancangan skema relasi basis data terstruktur, pencarian query SQL efisien, serta konfigurasi dasar jaringan MikroTik."
+                }
+            ];
+
+            return (
+                <section id="skills" className="py-24 relative bg-slate-950">
+                    <div className="container mx-auto px-6 md:px-12">
+                        <div className="text-center mb-16">
+                            <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mb-4">
+                                What I <span className="gradient-text">Do</span>
+                            </h2>
+                            <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-4"></div>
+                            <p className="text-slate-400 max-w-xl mx-auto text-sm md:text-base">
+                                Pilar keahlian dan bidang layanan yang saya tekuni dalam pengembangan solusi teknologi digital.
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {services.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className="glass-card rounded-2xl p-7 flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 border border-white/5 hover:border-primary/40 shadow-xl group"
+                                >
+                                    <div>
+                                        <div className="flex justify-between items-start mb-6">
+                                            <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} border flex items-center justify-center text-2xl group-hover:scale-110 transition-transform`}>
+                                                <i className={item.icon}></i>
+                                            </div>
+                                            <span className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">
+                                                {item.badge}
+                                            </span>
+                                        </div>
+
+                                        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
+                                            {item.title}
+                                        </h3>
+
+                                        <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                                            {item.desc}
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/5">
+                                            {item.skills.map((s, i) => (
+                                                <span key={i} className="text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-900/90 text-slate-300 border border-white/10">
+                                                    {s}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // --- COMPONENT: TECH STACK ---
+        const TechStack = () => {
+            const techCategories = [
+                {
+                    category: "Frontend",
+                    icon: "fa-solid fa-code text-blue-400",
+                    items: [
+                        { name: "HTML", icon: "fa-brands fa-html5 text-orange-500" },
+                        { name: "CSS", icon: "fa-brands fa-css3-alt text-blue-500" },
+                        { name: "JavaScript", icon: "fa-brands fa-js text-yellow-400" },
+                        { name: "Vue.js", icon: "fa-brands fa-vuejs text-emerald-400" },
+                        { name: "Tailwind CSS", icon: "fa-solid fa-wind text-cyan-400" }
+                    ]
+                },
+                {
+                    category: "Backend",
+                    icon: "fa-solid fa-gears text-purple-400",
+                    items: [
+                        { name: "PHP", icon: "fa-brands fa-php text-indigo-400" },
+                        { name: "CodeIgniter", icon: "fa-solid fa-fire text-orange-500" },
+                        { name: "Laravel", icon: "fa-brands fa-laravel text-red-500" },
+                    ]
+                },
+                {
+                    category: "Database",
+                    icon: "fa-solid fa-database text-emerald-400",
+                    items: [
+                        { name: "MySQL", icon: "fa-solid fa-database text-blue-400" },
+                        { name: "MariaDB", icon: "fa-solid fa-server text-teal-400" },
+                        { name: "Oracle SQL", icon: "fa-solid fa-database text-red-400" }
+                    ]
+                },
+                {
+                    category: "Mobile",
+                    icon: "fa-solid fa-mobile-screen text-pink-400",
+                    items: [
+                        { name: "Flutter", icon: "fa-solid fa-mobile-retro text-cyan-400" }
+                    ]
+                },
+                {
+                    category: "Tools & Config",
+                    icon: "fa-solid fa-screwdriver-wrench text-amber-400",
+                    items: [
+                        { name: "Git", icon: "fa-brands fa-git-alt text-orange-600" },
+                        { name: "GitHub", icon: "fa-brands fa-github text-slate-200" },
+                        { name: "Figma", icon: "fa-brands fa-figma text-pink-400" },
+                        { name: "Postman", icon: "fa-solid fa-paper-plane text-orange-500" },
+                        { name: "XAMPP", icon: "fa-solid fa-server text-amber-500" },
+                        { name: "MikroTik / Winbox", icon: "fa-solid fa-network-wired text-blue-300" }
+                    ]
+                }
+            ];
+
+            return (
+                <section className="py-20 relative bg-slate-900/60 border-y border-white/5">
+                    <div className="container mx-auto px-6 md:px-12">
+                        <div className="text-center mb-16">
+                            <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mb-4">
+                                Tech <span className="gradient-text">Stack</span>
+                            </h2>
+                            <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-4"></div>
+                            <p className="text-slate-400 max-w-lg mx-auto text-sm">
+                                Alat, bahasa pemrograman, dan framework yang digunakan dalam workflow saya.
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                            {techCategories.map((group, index) => (
+                                <div key={index} className="glass-card p-6 rounded-2xl border border-white/10 hover:border-primary/30 transition-all">
+                                    <div className="flex items-center gap-3 mb-5 border-b border-white/10 pb-3">
+                                        <i className={`${group.icon} text-lg`}></i>
+                                        <h3 className="text-lg font-bold text-white">{group.category}</h3>
+                                    </div>
+                                    <div className="flex flex-wrap gap-2.5">
+                                        {group.items.map((tech, i) => (
+                                            <div
+                                                key={i}
+                                                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900/80 border border-white/10 hover:border-primary/40 hover:bg-slate-800 transition-all text-xs font-medium text-slate-200"
+                                            >
+                                                <i className={`${tech.icon} text-sm`}></i>
+                                                <span>{tech.name}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // --- COMPONENT: EDUCATION ---
         const Education = () => {
             const eduData = [
                 {
                     year: "2024 - Sekarang",
                     degree: "D3 Teknik Informatika",
                     school: "Politeknik Negeri Cilacap",
-                    desc: "Fokus pada pengembangan web (PHP/CodeIgniter), UI/UX design menggunakan Figma, Flutter, dan manajemen database MySQL."
+                    status: "Mahasiswa Aktif",
+                    desc: "Fokus akademik pada pemrograman aplikasi web berbasis MVC (PHP/CodeIgniter), perancangan UI/UX menggunakan Figma, pengembangan mobile Flutter, arsitektur database MySQL, serta pemrograman berorientasi objek."
                 },
                 {
                     year: "2021 - 2024",
                     degree: "Jurusan Multimedia",
                     school: "SMK Negeri 1 Binangun",
-                    desc: "Mempelajari dasar-dasar desain grafis, produksi konten kreatif, dan teknik pengolahan multimedia."
+                    status: "Lulus",
+                    desc: "Mempelajari prinsip dasar desain grafis, animasi, pengolahan media audio-video, tata letak visual, serta produksi konten digital."
                 }
             ];
 
             return (
-                <section id="education" className="py-24 bg-slate-900/50">
+                <section id="education" className="py-24 bg-slate-950">
                     <div className="container mx-auto px-6 md:px-12">
                         <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mb-4">Riwayat <span className="gradient-text">Pendidikan</span></h2>
+                            <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mb-4">
+                                Riwayat <span className="gradient-text">Pendidikan</span>
+                            </h2>
                             <div className="w-20 h-1 bg-primary mx-auto rounded-full"></div>
                         </div>
 
                         <div className="max-w-3xl mx-auto">
-                            <div className="relative border-l-2 border-primary/30 pl-8 ml-4 md:ml-0 space-y-12">
+                            <div className="relative border-l-2 border-primary/30 pl-6 md:pl-10 space-y-12 ml-2 md:ml-4">
                                 {eduData.map((item, index) => (
-                                    <div key={index} className="relative">
-                                        <div className="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-slate-900 border-4 border-primary"></div>
-                                        <span className="text-primary font-medium text-sm mb-2 block">{item.year}</span>
-                                        <h3 className="text-xl font-bold text-white mb-1">{item.degree}</h3>
-                                        <h4 className="text-slate-400 font-medium mb-3">{item.school}</h4>
-                                        <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+                                    <div key={index} className="relative group">
+                                        {/* Dot Indicator */}
+                                        <div className="absolute -left-[31px] md:-left-[47px] top-1.5 w-6 h-6 rounded-full bg-slate-950 border-4 border-primary group-hover:scale-125 transition-transform duration-300 shadow-[0_0_12px_rgba(79,70,229,0.8)]"></div>
+
+                                        <div className="glass-card p-6 md:p-8 rounded-2xl border border-white/10 hover:border-primary/40 transition-all shadow-xl">
+                                            <div className="flex flex-wrap justify-between items-center gap-2 mb-3">
+                                                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/20 text-primary border border-primary/30">
+                                                    {item.year}
+                                                </span>
+                                                <span className="text-xs font-medium text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
+                                                    {item.status}
+                                                </span>
+                                            </div>
+
+                                            <h3 className="text-xl md:text-2xl font-bold text-white mb-1 font-heading">
+                                                {item.degree}
+                                            </h3>
+                                            <h4 className="text-slate-400 font-semibold text-sm md:text-base mb-4 flex items-center gap-2">
+                                                <i className="fa-solid fa-building-columns text-primary"></i> {item.school}
+                                            </h4>
+                                            <p className="text-slate-300 text-sm leading-relaxed">
+                                                {item.desc}
+                                            </p>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -365,14 +660,40 @@
             );
         };
 
-        const Experience = () => {
-            const [mainPhotoIndex, setMainPhotoIndex] = React.useState(0); // State untuk melacak foto utama
+        // --- COMPONENT: EXPERIENCE ---
+        const Experience = ({ onOpenModal }) => {
+            const [mainPhotoIndex, setMainPhotoIndex] = useState(0);
+            const [selectedDesign, setSelectedDesign] = useState(null);
+            const [designIndex, setDesignIndex] = useState(0);
 
             const expData = {
-                year: "2025 - Sekarang",
-                role: "Departemen Kominfo (Staff Desain Grafis)",
-                company: "Badan Eksekutif Mahasiswa (BEM) Politeknik Negeri Cilacap",
-                desc: "Bertanggung jawab dalam mengelola visual branding kabinet dan memproduksi konten kreatif harian. Berkolaborasi aktif dengan tim publikasi untuk menyederhanakan informasi berita yang kompleks menjadi infografis yang menarik.",
+                year: "2025 — 2026",
+                role: "STAFF DESAIN GRAFIS",
+                department: "Departemen Kominfo",
+                company: "BEM Politeknik Negeri Cilacap",
+                desc: "Bertanggung jawab dalam mengelola visual branding kabinet, memproduksi konten media sosial harian, dan merancang infografis publikasi berita kampus agar komunikatif, konsisten, dan estetis.",
+                keyContributions: [
+                    {
+                        title: "Visual Branding",
+                        desc: "Penyelarasan identitas visual, panduan warna, & template tata letak BEM PNC.",
+                        icon: "fa-solid fa-palette text-blue-400"
+                    },
+                    {
+                        title: "Social Media Content",
+                        desc: "Desain infografis harian, pengumuman resmi, & feed reels publikasi.",
+                        icon: "fa-solid fa-photo-film text-purple-400"
+                    },
+                    {
+                        title: "Information Design",
+                        desc: "Transformasi data & berita kampus kompleks menjadi sajian visual komunikatif.",
+                        icon: "fa-solid fa-chart-pie text-emerald-400"
+                    },
+                    {
+                        title: "Creative Content",
+                        desc: "Media promosi untuk Visi & Misi Ketua BEM 2025, Miracle 2025, Duta Kampus 2025, Bulan Pelatihan 2025, PKKMB PNC 2025/2026, Oprec BEM 2025, Makrab TI 2025/2026, Duta Kampus 2026, Forumpuan Bicara, & Upgrading BEM.",
+                        icon: "fa-solid fa-bullhorn text-pink-400"
+                    }
+                ],
                 photos: [
                     "./images/organisasi/bem-1.png",
                     "./images/organisasi/bem-2.png",
@@ -381,327 +702,360 @@
                 ]
             };
 
-            // Fungsi untuk membuat rotasi dan posisi foto
+            // Dataset Karya Desain Terpilih (Dapat dengan mudah Anda perbarui path imagenya saat mengunggah file di images/organisasi/design/)
+            const designWorks = [
+                {
+                    id: "design-01",
+                    number: "01",
+                    title: "Visual Branding Kabinet & Feeds Media Sosial BEM",
+                    category: "Visual Branding & Feeds",
+                    year: "2025",
+                    image: "./images/organisasi/bem-1.png",
+                    description: "Perancangan identitas visual, panduan warna, dan template tata letak media sosial resmi Badan Eksekutif Mahasiswa Politeknik Negeri Cilacap.",
+                    tools: ["Figma", "Adobe Photoshop", "Canva"]
+                },
+                {
+                    id: "design-02",
+                    number: "02",
+                    title: "Infografis & Publikasi Berita Kampus Kominfo",
+                    category: "Information Design",
+                    year: "2025",
+                    image: "./images/organisasi/bem-2.png",
+                    description: "Desain penyederhanaan informasi kompleks berita kegiatan kampus menjadi infografis publikasi digital yang komunikatif dan menarik bagi mahasiswa.",
+                    tools: ["Figma", "Adobe Illustrator", "Canva"]
+                },
+                {
+                    id: "design-03",
+                    number: "03",
+                    title: "Poster & Asset Promosi Pemilihan Duta Kampus PNC 2026",
+                    category: "Event Promotion & Media",
+                    year: "2026",
+                    image: "./images/organisasi/bem-3.png",
+                    description: "Desain poster resmi, banner pendaftaran, dan feeds publikasi program kerja Duta Kampus Politeknik Negeri Cilacap 2026.",
+                    tools: ["Figma", "Adobe Photoshop"]
+                },
+                {
+                    id: "design-04",
+                    number: "04",
+                    title: "Media Kampanye & Poster Forumpuan Bicara",
+                    category: "Campaign & Publication",
+                    year: "2025",
+                    image: "./images/organisasi/bem-4.png",
+                    description: "Desain materi publikasi, poster digital, dan konten kampanye edukatif untuk program kerja Forumpuan Bicara BEM PNC.",
+                    tools: ["Figma", "Canva"]
+                },
+                {
+                    id: "design-05",
+                    number: "05",
+                    title: "Visual Media & Spanduk Event Mogerak PNC",
+                    category: "Graphic Design & Print Media",
+                    year: "2025",
+                    image: "./images/organisasi/bem-1.png",
+                    description: "Perancangan visual banner, spanduk fisik, cetak identitas panitia, serta e-poster publikasi event Mogerak Politeknik Negeri Cilacap.",
+                    tools: ["Figma", "Adobe Photoshop"]
+                },
+                {
+                    id: "design-06",
+                    number: "06",
+                    title: "Template Konten Digital & Story Departemen Kominfo",
+                    category: "Digital Content Creation",
+                    year: "2025",
+                    image: "./images/organisasi/bem-2.png",
+                    description: "Penyusunan modul template instagram story dan feed reels harian untuk mempercepat alur kerja publikasi media BEM PNC.",
+                    tools: ["Figma", "Canva"]
+                }
+            ];
+
             const getStackStyle = (index) => {
                 const isMain = index === mainPhotoIndex;
                 const totalPhotos = expData.photos.length;
-
-                // Urutan tumpukan berdasarkan jarak dari foto utama
                 const stackOrder = (index - mainPhotoIndex + totalPhotos) % totalPhotos;
 
                 if (isMain) {
                     return {
-                        className: "absolute w-[340px] h-[440px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white z-[50] rotate-[2deg] translate-y-[-10px] scale-100 transition-all duration-500 ease-out cursor-pointer",
-                        label: "Main"
+                        className: "absolute w-[260px] sm:w-[300px] h-[340px] sm:h-[380px] rounded-2xl overflow-hidden shadow-2xl border-4 border-slate-800 z-[50] rotate-[2deg] translate-y-[-8px] scale-100 transition-all duration-500 ease-out cursor-pointer",
+                        label: "Utama"
                     };
                 } else if (stackOrder === 1) {
                     return {
-                        className: "absolute w-[320px] h-[420px] rounded-2xl overflow-hidden shadow-xl border-4 border-white rotate-[-8deg] -translate-x-10 translate-y-4 z-[40] opacity-90 scale-95 transition-all duration-500 ease-out cursor-pointer hover:rotate-[-10deg]",
-                        label: "Next"
+                        className: "absolute w-[240px] sm:w-[280px] h-[320px] sm:h-[360px] rounded-2xl overflow-hidden shadow-xl border-4 border-slate-800 rotate-[-8deg] -translate-x-6 translate-y-3 z-[40] opacity-90 scale-95 transition-all duration-500 ease-out cursor-pointer hover:rotate-[-10deg]",
+                        label: "Dokumentasi 2"
                     };
                 } else if (stackOrder === 2) {
                     return {
-                        className: "absolute w-[300px] h-[400px] rounded-2xl overflow-hidden shadow-lg border-4 border-white rotate-[12deg] translate-x-14 translate-y-8 z-[30] opacity-75 scale-90 transition-all duration-500 ease-out cursor-pointer hover:rotate-[15deg]",
-                        label: "Back 1"
+                        className: "absolute w-[220px] sm:w-[260px] h-[300px] sm:h-[340px] rounded-2xl overflow-hidden shadow-lg border-4 border-slate-800 rotate-[12deg] translate-x-10 translate-y-6 z-[30] opacity-75 scale-90 transition-all duration-500 ease-out cursor-pointer hover:rotate-[15deg]",
+                        label: "Dokumentasi 3"
                     };
                 } else {
                     return {
-                        className: "absolute w-[280px] h-[380px] rounded-2xl overflow-hidden shadow-md border-4 border-white rotate-[-15deg] -translate-x-16 translate-y-12 z-[20] opacity-50 scale-85 transition-all duration-500 ease-out cursor-pointer hover:rotate-[-18deg]",
-                        label: "Back 2"
+                        className: "absolute w-[200px] sm:w-[240px] h-[280px] sm:h-[320px] rounded-2xl overflow-hidden shadow-md border-4 border-slate-800 rotate-[-15deg] -translate-x-12 translate-y-9 z-[20] opacity-50 scale-85 transition-all duration-500 ease-out cursor-pointer hover:rotate-[-18deg]",
+                        label: "Dokumentasi 4"
                     };
                 }
             };
 
+            const openDesignModal = (item, index) => {
+                setSelectedDesign(item);
+                setDesignIndex(index);
+                if (onOpenModal) onOpenModal(true);
+            };
+
+            const closeDesignModal = () => {
+                setSelectedDesign(null);
+                if (onOpenModal) onOpenModal(false);
+            };
+
+            const nextDesign = () => {
+                const nextIdx = (designIndex + 1) % designWorks.length;
+                setDesignIndex(nextIdx);
+                setSelectedDesign(designWorks[nextIdx]);
+            };
+
+            const prevDesign = () => {
+                const prevIdx = (designIndex - 1 + designWorks.length) % designWorks.length;
+                setDesignIndex(prevIdx);
+                setSelectedDesign(designWorks[prevIdx]);
+            };
+
+            // Keyboard Escape Handler for Design Modal
+            useEffect(() => {
+                const handleKeyDown = (e) => {
+                    if (e.key === 'Escape' && selectedDesign) {
+                        closeDesignModal();
+                    }
+                };
+                window.addEventListener('keydown', handleKeyDown);
+                return () => window.removeEventListener('keydown', handleKeyDown);
+            }, [selectedDesign]);
+
             return (
-                <section id="experience" className="py-24 relative overflow-hidden bg-slate-50">
+                <section id="experience" className="py-24 relative overflow-hidden bg-slate-900/50 border-t border-white/5">
                     <div className="container mx-auto px-6 md:px-12">
-                        <div className="text-center mb-20">
-                            <h2 className="text-3xl md:text-4xl font-bold font-heading text-slate-900 mb-4">Pengalaman <span className="gradient-text">Organisasi</span></h2>
-                            <div className="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+                        {/* 1. HEADER SECTION */}
+                        <div className="text-center mb-16 max-w-3xl mx-auto">
+                            <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mb-3">
+                                Pengalaman <span className="gradient-text">Organisasi</span>
+                            </h2>
+                            <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-4"></div>
+                            <p className="text-slate-400 text-sm md:text-base leading-relaxed">
+                                Pengalaman saya dalam berkontribusi di bidang desain, publikasi, dan komunikasi visual.
+                            </p>
                         </div>
 
-                        <div className="flex flex-col lg:flex-row gap-16 items-center max-w-6xl mx-auto">
-
-                            {/* KIRI: BAGIAN TEKS */}
-                            <div className="w-full lg:w-1/2">
-                                <div className="glass-card p-10 rounded-3xl border border-slate-200/80 shadow-xl relative">
-                                    <div className="absolute -top-5 -left-5 bg-indigo-50 p-4 rounded-xl border border-indigo-100 shadow-sm">
-                                        <i className="fa-solid fa-star text-2xl text-primary"></i>
+                        {/* 2. TOP BLOCK: INFORMASI ORGANISASI & DOKUMENTASI KEGIATAN */}
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center max-w-6xl mx-auto mb-20">
+                            {/* Kiri: Informasi Role & Key Contributions */}
+                            <div className="lg:col-span-7 flex flex-col space-y-6">
+                                <div className="glass-card p-8 rounded-3xl border border-white/10 shadow-xl relative">
+                                    <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                                        <span className="px-3.5 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-primary/20 text-primary border border-primary/30">
+                                            {expData.year}
+                                        </span>
+                                        <span className="text-xs font-semibold text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">
+                                            {expData.department}
+                                        </span>
                                     </div>
-                                    <span className="text-primary font-bold tracking-widest text-sm uppercase mb-3 block">{expData.year}</span>
-                                    <h3 className="text-3xl font-bold text-slate-900 mb-2">{expData.role}</h3>
-                                    <h4 className="text-xl text-slate-600 mb-8">{expData.company}</h4>
 
-                                    <div className="relative">
-                                        <i className="fa-solid fa-quote-left text-4xl text-primary/20 absolute -top-4 -left-2"></i>
-                                        <p className="text-slate-600 text-lg leading-relaxed pl-8 relative z-10 italic">
-                                            "{expData.desc}"
-                                        </p>
+                                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-1 font-heading">
+                                        {expData.role}
+                                    </h3>
+                                    <h4 className="text-base md:text-lg text-slate-300 font-semibold mb-4 flex items-center gap-2">
+                                        <i className="fa-solid fa-landmark text-primary text-sm"></i> {expData.company}
+                                    </h4>
+
+                                    <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-6 bg-slate-950/40 p-4 rounded-xl border border-white/5">
+                                        {expData.desc}
+                                    </p>
+
+                                    {/* Key Contributions Sub-block */}
+                                    <div className="pt-2">
+                                        <h5 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+                                            <i className="fa-solid fa-star text-primary text-xs"></i> Key Contributions
+                                        </h5>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                            {expData.keyContributions.map((kc, i) => (
+                                                <div key={i} className="p-3.5 rounded-xl bg-slate-900/80 border border-white/5 hover:border-primary/30 transition-colors flex items-start gap-3">
+                                                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-sm shrink-0 mt-0.5">
+                                                        <i className={kc.icon}></i>
+                                                    </div>
+                                                    <div>
+                                                        <h6 className="text-xs font-bold text-white mb-0.5">{kc.title}</h6>
+                                                        <p className="text-[11px] text-slate-400 leading-snug">{kc.desc}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                {/* Tombol Navigasi Sederhana */}
-                                <div className="flex justify-center gap-2 mt-8">
+                            {/* Kanan: Balanced Interactive Photo Stack (tanpa header berlebih) */}
+                            <div className="lg:col-span-5 flex flex-col items-center justify-center pt-4 lg:pt-0">
+                                <div className="relative w-full h-[380px] flex items-center justify-center overflow-hidden">
+                                    {expData.photos.map((photo, index) => {
+                                        const { className, label } = getStackStyle(index);
+                                        return (
+                                            <div
+                                                key={index}
+                                                className={className}
+                                                onClick={() => setMainPhotoIndex(index)}
+                                                title="Klik untuk membawa foto ke depan"
+                                            >
+                                                <img
+                                                    src={photo}
+                                                    className="w-full h-full object-cover"
+                                                    alt={`Dokumentasi Kegiatan BEM PNC - ${label}`}
+                                                    onError={(e) => { e.target.src = expData.photos[0]; }}
+                                                />
+                                                {index === mainPhotoIndex && (
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent flex items-end p-4 z-10">
+                                                        <span className="text-white font-semibold bg-primary/90 backdrop-blur-md px-3 py-1 rounded-full text-xs shadow-md">
+                                                            <i className="fa-solid fa-camera mr-1"></i> Dokumentasi BEM
+                                                        </span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                    <div className="absolute w-60 h-60 bg-primary/15 rounded-full blur-3xl -z-10"></div>
+                                </div>
+
+                                {/* Photo Stack Selector Dots */}
+                                <div className="flex justify-center items-center gap-2.5 mt-4">
                                     {expData.photos.map((_, idx) => (
                                         <button
                                             key={idx}
                                             onClick={() => setMainPhotoIndex(idx)}
-                                            className={`w-3 h-3 rounded-full transition-colors ${idx === mainPhotoIndex ? 'bg-primary' : 'bg-slate-300 hover:bg-slate-400'}`}
-                                            title={`Lihat Foto ${idx + 1}`}
+                                            className={`w-3 h-3 rounded-full transition-all duration-300 ${idx === mainPhotoIndex ? 'bg-primary scale-125 shadow-[0_0_8px_#4f46e5]' : 'bg-slate-700 hover:bg-slate-500'}`}
+                                            title={`Foto Dokumentasi ${idx + 1}`}
+                                            aria-label={`Pilih Foto Dokumentasi BEM ${idx + 1}`}
                                         />
                                     ))}
                                 </div>
                             </div>
+                        </div>
 
-                            {/* KANAN: GAYA FOTO BERTUMPUK INTERAKTIF */}
-                            <div className="w-full lg:w-1/2 relative h-[480px] flex items-center justify-center">
-                                {expData.photos.map((photo, index) => {
-                                    const { className, label } = getStackStyle(index);
-                                    return (
-                                        <div
-                                            key={index}
-                                            className={className}
-                                            onClick={() => setMainPhotoIndex(index)} // Klik untuk ganti foto utama
-                                        >
-                                            <img src={photo} className="w-full h-full object-cover" alt={`Dokumentasi BEM ${label}`} />
-                                            {index === mainPhotoIndex && (
-                                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex items-end p-6 z-10">
-                                                    <span className="text-white font-bold bg-primary/90 px-4 py-1 rounded-full text-xs shadow-md">Featured Work</span>
-                                                </div>
-                                            )}
-                                            <div className="absolute inset-0 bg-primary/10 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
-                                                <span className="text-white bg-slate-900/60 backdrop-blur-sm px-3 py-1 rounded-full text-sm">Klik untuk fokus</span>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                                {/* Dekorasi Latar Belakang */}
-                                <div className="absolute w-72 h-72 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+                        {/* SECTION DIVIDER */}
+                        <div className="w-full max-w-6xl mx-auto my-12 border-t border-white/10 relative">
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 glass px-4 py-1 rounded-full border border-white/10 text-xs font-semibold text-slate-400">
+                                <i className="fa-solid fa-pen-nib text-primary mr-1"></i> PORTFOLIO DESAIN KOMINFO
                             </div>
                         </div>
-                    </div>
-                </section>
-            );
-        };
 
-        const Certificates = () => {
-            const [selectedCategory, setSelectedCategory] = React.useState("Semua");
-            const [selectedCert, setSelectedCert] = React.useState(null);
-            const [certIndex, setCertIndex] = React.useState(0);
+                        {/* 3. BOTTOM BLOCK: KARYA DESAIN TERPILIH */}
+                        <div className="max-w-6xl mx-auto">
+                            <div className="text-center mb-12">
+                                <h3 className="text-2xl md:text-3xl font-bold font-heading text-white mb-2">
+                                    Karya Desain <span className="gradient-text">Terpilih</span>
+                                </h3>
+                                <p className="text-slate-400 text-sm max-w-xl mx-auto">
+                                    Beberapa karya desain yang saya buat selama berkontribusi di Departemen Kominfo BEM Politeknik Negeri Cilacap.
+                                </p>
+                            </div>
 
-            const certData = [
-                {
-                    title: "MikroTik Certified Network Associate (MTCNA)",
-                    issuer: "MikroTik Academy",
-                    year: "2025",
-                    category: "Sertifikasi Technical",
-                    image: "./images/sertifikat/SERTIFIKAT-MTCNA.png",
-                    pdf: "./images/sertifikat/SERTIFIKAT-MTCNA.pdf",
-                    desc: "Sertifikasi internasional keahlian jaringan komputer, konfigurasi router, routing, firewall, dan manajemen jaringan MikroTik."
-                },
-                {
-                    title: "Intermediate Assistant Web Developer",
-                    issuer: "Vocational Bootcamp - PNC",
-                    year: "2025",
-                    category: "Sertifikasi Technical",
-                    image: "./images/sertifikat/Sertifikat_Intermediate Assistant Web Developer - VBL - Politeknik Negeri Cilacap.png",
-                    pdf: "./images/sertifikat/Sertifikat_Intermediate Assistant Web Developer - VBL - Politeknik Negeri Cilacap.pdf",
-                    desc: "Sertifikasi keahlian tingkat lanjut pengembangan aplikasi web modern, arsitektur MVC, database, dan integrasi backend."
-                },
-                {
-                    title: "Fundamental of Assistant Web Developer",
-                    issuer: "Vocational Bootcamp - PNC",
-                    year: "2024",
-                    category: "Sertifikasi Technical",
-                    image: "./images/sertifikat/Sertifikat_Fundamental of Assistant Web Developer - VBL - Politeknik Negeri Cilacap.png",
-                    pdf: "./images/sertifikat/Sertifikat_Fundamental of Assistant Web Developer - VBL - Politeknik Negeri Cilacap.pdf",
-                    desc: "Sertifikasi dasar-dasar pemrograman web, struktur HTML5, styling CSS3, JavaScript, dan logika pemrograman web."
-                },
-                {
-                    title: "Panitia Duta Kampus Politeknik Negeri Cilacap 2026",
-                    issuer: "BEM PNC | Divisi Media",
-                    year: "2026",
-                    category: "Kepanitiaan & Program",
-                    image: "./images/sertifikat/Sertifikat-DUTKAM26.png",
-                    pdf: "./images/sertifikat/Sertifikat-DUTKAM26.pdf",
-                    desc: "Sertifikat partisipasi dan kepanitiaan dalam penyelenggaraan program kerja Badan Eksekutif Mahasiswa Politeknik Negeri Cilacap Duta Kampus PNC 2026."
-                },
-                {
-                    title: "Panitia Forumpuan Bicara",
-                    issuer: "BEM PNC | Divisi Media",
-                    year: "2025",
-                    category: "Kepanitiaan & Program",
-                    image: "./images/sertifikat/Sertifikat-FORUMPUAN.png",
-                    pdf: "./images/sertifikat/Sertifikat-FORUMPUAN.pdf",
-                    desc: "Sertifikat partisipasi dan kepanitiaan dalam penyelenggaraan program kerja Badan Eksekutif Mahasiswa Politeknik Negeri Cilacap Forumpuan Bicara."
-                },
-                {
-                    title: "Panitia Mogerak",
-                    issuer: "BEM PNC | Divisi Acara",
-                    year: "2025",
-                    category: "Kepanitiaan & Program",
-                    image: "./images/sertifikat/Sertifikat-MOGERAK.png",
-                    pdf: "./images/sertifikat/Sertifikat-MOGERAK.pdf",
-                    desc: "Sertifikat partisipasi dan kepanitiaan dalam penyelenggaraan program kerja Badan Eksekutif Mahasiswa Politeknik Negeri Cilacap Mogerak."
-                },
-                {
-                    title: "Pengantar Mindset Digital 1",
-                    issuer: "Pelatihan Digital",
-                    year: "2024",
-                    category: "Sertifikasi Technical",
-                    image: "./images/sertifikat/Sertifikat_Pengantar Mindset Digital 1 _ Mengubah Masa Depan Anda Dengan Pola Pikir Digital.png",
-                    pdf: "./images/sertifikat/Sertifikat_Pengantar Mindset Digital 1 _ Mengubah Masa Depan Anda Dengan Pola Pikir Digital.pdf",
-                    desc: "Sertifikat kompetensi transformasi digital, adaptasi teknologi, dan pemahaman pola pikir inovatif di era digital."
-                }
-            ];
-
-            const categories = ["Semua", "Sertifikasi Technical", "Kepanitiaan & Program"];
-
-            const filteredCertificates = selectedCategory === "Semua"
-                ? certData
-                : certData.filter(cert => cert.category === selectedCategory);
-
-            const openModal = (cert, index) => {
-                setSelectedCert(cert);
-                setCertIndex(index);
-            };
-
-            const nextCert = () => {
-                const nextIdx = (certIndex + 1) % filteredCertificates.length;
-                setCertIndex(nextIdx);
-                setSelectedCert(filteredCertificates[nextIdx]);
-            };
-
-            const prevCert = () => {
-                const prevIdx = (certIndex - 1 + filteredCertificates.length) % filteredCertificates.length;
-                setCertIndex(prevIdx);
-                setSelectedCert(filteredCertificates[prevIdx]);
-            };
-
-            return (
-                <section id="certificates" className="py-24 relative overflow-hidden bg-slate-900/50">
-                    <div className="container mx-auto px-6 md:px-12">
-                        <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mb-4">
-                                Sertifikat & <span className="gradient-text">Kepanitiaan</span>
-                            </h2>
-                            <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-8"></div>
-                            <p className="text-slate-400 max-w-2xl mx-auto text-base">
-                                Dokumentasi pencapaian kompetensi teknis, pelatihan profesional, serta pengalaman kepanitiaan organisasi.
-                            </p>
-
-                            {/* Category Filter Pills */}
-                            <div className="flex flex-wrap justify-center gap-3 mt-8">
-                                {categories.map((cat) => (
-                                    <button
-                                        key={cat}
-                                        onClick={() => setSelectedCategory(cat)}
-                                        className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedCategory === cat
-                                            ? 'bg-primary text-white shadow-[0_0_15px_rgba(79,70,229,0.5)] scale-105'
-                                            : 'glass border border-white/10 text-slate-400 hover:text-white hover:bg-white/10'
-                                            }`}
+                            {/* 6 Design Featured Cards Grid */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {designWorks.map((work, idx) => (
+                                    <div
+                                        key={work.id}
+                                        onClick={() => openDesignModal(work, idx)}
+                                        className="glass-card rounded-2xl overflow-hidden border border-white/5 hover:border-primary/40 shadow-xl transition-all duration-300 group cursor-pointer flex flex-col justify-between"
                                     >
-                                        {cat}
-                                    </button>
+                                        <div>
+                                            {/* Preview Image Box */}
+                                            <div className="relative h-48 overflow-hidden bg-slate-950">
+                                                <img
+                                                    src={work.image}
+                                                    alt={work.title}
+                                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                                    onError={(e) => { e.target.src = './images/organisasi/bem-1.png'; }}
+                                                    loading="lazy"
+                                                />
+                                                <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                                                    <span className="text-white font-semibold bg-primary/90 px-4 py-2 rounded-full text-xs tracking-wider shadow-lg flex items-center gap-2">
+                                                        <i className="fa-solid fa-expand"></i> View Design
+                                                    </span>
+                                                </div>
+                                                <span className="absolute top-3 left-3 text-xs font-bold font-mono px-2.5 py-0.5 rounded-md bg-slate-900/90 text-primary border border-primary/30">
+                                                    {work.number}
+                                                </span>
+                                            </div>
+
+                                            {/* Card Content */}
+                                            <div className="p-5">
+                                                <span className="text-[10px] font-semibold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 mb-2 inline-block">
+                                                    {work.category}
+                                                </span>
+                                                <h4 className="text-base font-bold text-white mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                                                    {work.title}
+                                                </h4>
+                                                <p className="text-slate-400 text-xs leading-relaxed line-clamp-2">
+                                                    {work.description}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        {/* Card Footer */}
+                                        <div className="px-5 pb-5 pt-0 border-t border-white/5 mt-auto pt-3 flex justify-between items-center text-xs">
+                                            <div className="flex flex-wrap gap-1">
+                                                {work.tools.map((t, i) => (
+                                                    <span key={i} className="text-[10px] font-medium text-slate-300 bg-white/5 px-2 py-0.5 rounded">
+                                                        {t}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                            <span className="text-xs font-semibold text-primary group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                                                Detail <i className="fa-solid fa-arrow-right text-[10px]"></i>
+                                            </span>
+                                        </div>
+                                    </div>
                                 ))}
                             </div>
                         </div>
-
-                        {/* Certificate Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {filteredCertificates.map((cert, index) => (
-                                <div
-                                    key={index}
-                                    className="glass-card rounded-2xl overflow-hidden group cursor-pointer hover:-translate-y-2 transition-all duration-300 border border-white/5 hover:border-primary/40 shadow-xl flex flex-col justify-between"
-                                    onClick={() => openModal(cert, index)}
-                                >
-                                    <div>
-                                        {/* Image Box */}
-                                        <div className="relative h-52 overflow-hidden bg-slate-900/80">
-                                            <img
-                                                src={cert.image}
-                                                alt={cert.title}
-                                                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                                            />
-                                            <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                                                <span className="text-white font-medium bg-primary/80 px-4 py-2 rounded-full text-xs tracking-wider shadow-lg flex items-center gap-2">
-                                                    <i className="fa-solid fa-expand"></i> Pratinjau Sertifikat
-                                                </span>
-                                            </div>
-                                            <span className="absolute top-3 right-3 text-xs font-semibold px-3 py-1 rounded-full bg-slate-900/90 text-primary border border-primary/30 shadow-sm backdrop-blur-md">
-                                                {cert.year}
-                                            </span>
-                                        </div>
-
-                                        {/* Content Box */}
-                                        <div className="p-6">
-                                            <div className="text-xs font-semibold text-emerald-400 mb-2 flex items-center gap-1.5">
-                                                <i className="fa-solid fa-award"></i>
-                                                <span>{cert.issuer}</span>
-                                            </div>
-                                            <h3 className="text-lg font-bold text-white mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                                                {cert.title}
-                                            </h3>
-                                            <p className="text-slate-400 text-sm leading-relaxed line-clamp-2 mb-4">
-                                                {cert.desc}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    {/* Card Footer */}
-                                    <div className="px-6 pb-6 pt-0 flex justify-between items-center text-xs text-slate-400 border-t border-white/5 mt-auto pt-4">
-                                        <span className="bg-primary/10 text-primary px-2.5 py-1 rounded-md border border-primary/20 font-medium">
-                                            {cert.category}
-                                        </span>
-                                        <span className="group-hover:text-primary transition-colors flex items-center gap-1 font-medium text-slate-400">
-                                            Detail <i className="fa-solid fa-arrow-right text-[10px]"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
                     </div>
 
-                    {/* MODAL PREVIEW */}
-                    {selectedCert && (
+                    {/* 4. DESIGN PREVIEW LIGHTBOX MODAL */}
+                    {selectedDesign && (
                         <div
-                            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 animate-fadeIn"
-                            onClick={() => setSelectedCert(null)}
+                            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-6 animate-fadeIn"
+                            onClick={closeDesignModal}
                         >
                             <div
-                                className="relative max-w-4xl w-full glass-card bg-slate-900 rounded-2xl overflow-hidden border border-white/10 shadow-2xl p-6 md:p-8"
+                                className="relative max-w-4xl w-full glass-card bg-slate-900 rounded-2xl overflow-hidden border border-white/10 shadow-2xl p-6 md:p-8 max-h-[90vh] overflow-y-auto"
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 {/* Close Button */}
                                 <button
-                                    onClick={() => setSelectedCert(null)}
+                                    onClick={closeDesignModal}
                                     className="absolute top-4 right-4 text-slate-400 hover:text-white text-2xl w-10 h-10 rounded-full glass flex items-center justify-center transition-colors z-20"
+                                    aria-label="Tutup Pratinjau Desain"
                                 >
                                     &times;
                                 </button>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                                    {/* Left: Image Container with Nav */}
-                                    <div className="relative group rounded-xl overflow-hidden bg-slate-950 border border-white/10">
+                                    {/* Left Image Box */}
+                                    <div className="relative group rounded-xl overflow-hidden bg-slate-950 border border-white/10 flex items-center justify-center p-2 min-h-[260px]">
                                         <img
-                                            src={selectedCert.image}
-                                            alt={selectedCert.title}
-                                            className="w-full max-h-[60vh] object-contain rounded-xl"
+                                            src={selectedDesign.image}
+                                            alt={selectedDesign.title}
+                                            className="w-full max-h-[55vh] object-contain rounded-lg"
+                                            onError={(e) => { e.target.src = './images/organisasi/bem-1.png'; }}
                                         />
 
-                                        {filteredCertificates.length > 1 && (
+                                        {designWorks.length > 1 && (
                                             <>
                                                 <button
-                                                    onClick={prevCert}
-                                                    className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 text-white hover:bg-primary flex items-center justify-center transition-colors text-lg"
-                                                    title="Sertifikat Sebelumnya"
+                                                    onClick={prevDesign}
+                                                    className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 text-white hover:bg-primary flex items-center justify-center transition-colors text-xl shadow-lg"
+                                                    aria-label="Desain Sebelumnya"
                                                 >
                                                     ‹
                                                 </button>
                                                 <button
-                                                    onClick={nextCert}
-                                                    className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 text-white hover:bg-primary flex items-center justify-center transition-colors text-lg"
-                                                    title="Sertifikat Selanjutnya"
+                                                    onClick={nextDesign}
+                                                    className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 text-white hover:bg-primary flex items-center justify-center transition-colors text-xl shadow-lg"
+                                                    aria-label="Desain Selanjutnya"
                                                 >
                                                     ›
                                                 </button>
@@ -709,43 +1063,47 @@
                                         )}
                                     </div>
 
-                                    {/* Right: Info & Actions */}
+                                    {/* Right Info Box */}
                                     <div className="flex flex-col justify-between space-y-6">
                                         <div>
                                             <div className="flex items-center gap-3 mb-3">
                                                 <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/20 text-primary border border-primary/30">
-                                                    {selectedCert.category}
+                                                    {selectedDesign.category}
                                                 </span>
                                                 <span className="text-xs text-slate-400 font-medium">
-                                                    <i className="fa-regular fa-calendar-alt mr-1"></i> {selectedCert.year}
+                                                    <i className="fa-regular fa-calendar-alt mr-1"></i> {selectedDesign.year}
+                                                </span>
+                                                <span className="text-xs text-slate-500 font-mono ml-auto">
+                                                    Desain {designIndex + 1} dari {designWorks.length}
                                                 </span>
                                             </div>
 
-                                            <h3 className="text-2xl font-bold font-heading text-white mb-2 leading-snug">
-                                                {selectedCert.title}
+                                            <h3 className="text-xl md:text-2xl font-bold font-heading text-white mb-2 leading-snug">
+                                                {selectedDesign.title}
                                             </h3>
-                                            <p className="text-emerald-400 font-semibold text-sm mb-4">
-                                                <i className="fa-solid fa-award mr-1.5"></i> Penerbit: {selectedCert.issuer}
+
+                                            <p className="text-slate-300 text-sm leading-relaxed bg-slate-950/60 p-4 rounded-xl border border-white/5 mb-4">
+                                                {selectedDesign.description}
                                             </p>
-                                            <p className="text-slate-300 text-sm leading-relaxed bg-slate-900/60 p-4 rounded-xl border border-white/5">
-                                                {selectedCert.desc}
-                                            </p>
+
+                                            <div>
+                                                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Software / Tools:</h4>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {selectedDesign.tools.map((t, i) => (
+                                                        <span key={i} className="px-3 py-1 rounded-lg text-xs font-medium bg-white/5 text-slate-200 border border-white/10">
+                                                            {t}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        <div className="flex flex-wrap gap-4 pt-2">
-                                            <a
-                                                href={selectedCert.pdf}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="px-6 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-indigo-600 transition-all text-sm flex items-center gap-2 shadow-lg shadow-indigo-600/30"
-                                            >
-                                                <i className="fa-solid fa-file-pdf"></i> Buka Dokumen PDF
-                                            </a>
+                                        <div className="flex justify-end pt-2 border-t border-white/10">
                                             <button
-                                                onClick={() => setSelectedCert(null)}
-                                                className="px-6 py-2.5 rounded-full glass border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-all text-sm"
+                                                onClick={closeDesignModal}
+                                                className="px-6 py-2.5 rounded-full glass border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-all text-xs font-medium"
                                             >
-                                                Tutup
+                                                Tutup Pratinjau
                                             </button>
                                         </div>
                                     </div>
@@ -757,15 +1115,21 @@
             );
         };
 
-        const Projects = () => {
-            // State untuk mengatur modal galeri
-            const [selectedProject, setSelectedProject] = React.useState(null);
-            const [currentImgIndex, setCurrentImgIndex] = React.useState(0);
+        // --- COMPONENT: PROJECTS ---
+        const Projects = ({ onOpenModal }) => {
+            const [selectedCategory, setSelectedCategory] = useState("Semua");
+            const [selectedProject, setSelectedProject] = useState(null);
+            const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
             const projectsData = [
                 {
+                    id: "sibea",
                     title: "SIBEA (Sistem Informasi Beasiswa Kampus)",
-                    category: "Web Development & UI/UX",
+                    category: "Web Development",
+                    subCategory: "Web Development & UI/UX Design",
+                    role: "Full-Stack Developer & UI/UX Designer",
+                    description: "Sistem Informasi Beasiswa berbasis web yang dirancang untuk mempermudah pendaftaran beasiswa mahasiswa, pengelolaan kuota beasiswa oleh admin, verifikasi berkas otomatis, serta pembuatan laporan penerima beasiswa.",
+                    contribution: "Merancang UI/UX wireframe & prototype interaktif di Figma, menyusun arsitektur basis data MySQL, serta membangun aplikasi full-stack menggunakan PHP CodeIgniter untuk portal admin dan mahasiswa.",
                     image: "./images/sibea/beranda.png",
                     gallery: [
                         "./images/sibea/beranda.png",
@@ -786,11 +1150,18 @@
                         "./images/sibea/mhs_keterangangagal.png",
                         "./images/sibea/mhs_profile.png"
                     ],
-                    tags: ["PHP", "CodeIgniter", "MySQL", "Figma"]
+                    tags: ["PHP", "CodeIgniter", "MySQL", "Figma", "HTML5/CSS3"],
+                    github: "", // Kosongkan jika belum tersedia
+                    demo: ""    // Kosongkan jika belum tersedia
                 },
                 {
+                    id: "sipilab",
                     title: "SIPILAB (Sistem Informasi Jadwal Piket Lab. Komputer)",
                     category: "UI/UX Design",
+                    subCategory: "UI/UX Design & Prototyping",
+                    role: "UI/UX Designer",
+                    description: "Perancangan desain antarmuka sistem pengelolaan jadwal piket laboratorium komputer. Fitur mencakup absensi piket digital, pengajuan tukar jadwal antar teknisi, serta pemantauan riwayat keaktifan piket laboratorium.",
+                    contribution: "Melakukan analisis kebutuhan laboratorium, menyusun alur antarmuka pengguna (user flow), membuat wireframe hingga visual UI beresolusi tinggi, dan menyusun prototype interaktif di Figma.",
                     image: "./images/sipilab/beranda.png",
                     gallery: [
                         "./images/sipilab/beranda.png",
@@ -810,11 +1181,18 @@
                         "./images/sipilab/mhs_riwayatabsensi.png",
                         "./images/sipilab/mhs_profile.png"
                     ],
-                    tags: ["Figma", "UI Design", "Prototyping"]
+                    tags: ["Figma", "UI/UX Design", "Wireframing", "Prototyping"],
+                    github: "",
+                    demo: ""
                 },
                 {
+                    id: "sipeduli",
                     title: "SIPEDULI (Sistem Informasi Perlindungan dan Peduli Sosial)",
                     category: "UI/UX Design",
+                    subCategory: "UI/UX Design & Prototyping",
+                    role: "UI/UX Designer",
+                    description: "Desain sistem informasi platform sosial digital untuk pelaporan insiden darurat, pengajuan program bantuan sosial, donasi publik, serta validasi data penerima bantuan sosial oleh pihak berwenang.",
+                    contribution: "Mendesain komponen antarmuka yang ramah pengguna, sistem navigasi responsif, alur pengajuan bantuan sosial, dan antarmuka pemantauan status laporan secara real-time.",
                     image: "./images/sipeduli/beranda.png",
                     gallery: [
                         "./images/sipeduli/beranda.png",
@@ -839,61 +1217,281 @@
                         "./images/sipeduli/usr_ajuanbansos.png",
                         "./images/sipeduli/usr_profile.png"
                     ],
-                    tags: ["Figma", "UI Design", "Prototyping"]
+                    tags: ["Figma", "UI/UX Design", "User Research", "Social Platform"],
+                    github: "",
+                    demo: ""
                 }
             ];
 
-            const nextImg = () => setCurrentImgIndex((prev) => (prev + 1) % selectedProject.gallery.length);
-            const prevImg = () => setCurrentImgIndex((prev) => (prev - 1 + selectedProject.gallery.length) % selectedProject.gallery.length);
+            const categories = ["Semua", "Web Development", "UI/UX Design"];
+
+            const filteredProjects = selectedCategory === "Semua"
+                ? projectsData
+                : projectsData.filter(p => p.category === selectedCategory);
+
+            const openProjectModal = (proj) => {
+                setSelectedProject(proj);
+                setCurrentImgIndex(0);
+                onOpenModal(true);
+            };
+
+            const closeProjectModal = () => {
+                setSelectedProject(null);
+                onOpenModal(false);
+            };
+
+            const nextImg = () => {
+                if (!selectedProject) return;
+                setCurrentImgIndex((prev) => (prev + 1) % selectedProject.gallery.length);
+            };
+
+            const prevImg = () => {
+                if (!selectedProject) return;
+                setCurrentImgIndex((prev) => (prev - 1 + selectedProject.gallery.length) % selectedProject.gallery.length);
+            };
+
+            // Keyboard Escape Handler
+            useEffect(() => {
+                const handleKeyDown = (e) => {
+                    if (e.key === 'Escape' && selectedProject) {
+                        closeProjectModal();
+                    }
+                };
+                window.addEventListener('keydown', handleKeyDown);
+                return () => window.removeEventListener('keydown', handleKeyDown);
+            }, [selectedProject]);
 
             return (
-                <section id="projects" className="py-24 bg-slate-950">
+                <section id="projects" className="py-24 bg-slate-950 relative">
                     <div className="container mx-auto px-6 md:px-12">
                         <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mb-4">Proyek <span className="gradient-text">Pilihan</span></h2>
-                            <div className="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+                            <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mb-4">
+                                Proyek <span className="gradient-text">Pilihan</span>
+                            </h2>
+                            <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-8"></div>
+
+                            {/* Category Filter Pills */}
+                            <div className="flex flex-wrap justify-center gap-3">
+                                {categories.map((cat) => (
+                                    <button
+                                        key={cat}
+                                        onClick={() => setSelectedCategory(cat)}
+                                        className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${selectedCategory === cat
+                                            ? 'bg-primary text-white shadow-[0_0_20px_rgba(79,70,229,0.5)] scale-105'
+                                            : 'glass border border-white/10 text-slate-400 hover:text-white hover:bg-white/10'
+                                            }`}
+                                    >
+                                        {cat}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
 
+                        {/* Project Cards Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {projectsData.map((project, index) => (
-                                <div key={index} className="glass-card rounded-2xl overflow-hidden group cursor-pointer border border-white/5 hover:border-primary/40 shadow-xl transition-all duration-300" onClick={() => { setSelectedProject(project); setCurrentImgIndex(0); }}>
-                                    <div className="relative h-48 overflow-hidden bg-slate-900/80">
-                                        <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <span className="text-white font-medium bg-primary/80 px-4 py-2 rounded-full text-sm">Klik untuk Galeri</span>
+                            {filteredProjects.map((project) => (
+                                <div
+                                    key={project.id}
+                                    className="glass-card rounded-2xl overflow-hidden group cursor-pointer border border-white/5 hover:border-primary/40 shadow-xl transition-all duration-300 flex flex-col justify-between"
+                                    onClick={() => openProjectModal(project)}
+                                >
+                                    <div>
+                                        <div className="relative h-52 overflow-hidden bg-slate-900/90">
+                                            <img
+                                                src={project.image}
+                                                alt={project.title}
+                                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                                loading="lazy"
+                                            />
+                                            <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                                                <span className="text-white font-medium bg-primary/90 px-4 py-2 rounded-full text-xs tracking-wider shadow-lg flex items-center gap-2">
+                                                    <i className="fa-solid fa-magnifying-glass"></i> Lihat Detail & Galeri
+                                                </span>
+                                            </div>
+                                            <span className="absolute top-3 right-3 text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-slate-900/90 text-emerald-400 border border-emerald-500/30 shadow-md">
+                                                {project.category}
+                                            </span>
+                                        </div>
+
+                                        <div className="p-6">
+                                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors line-clamp-1">
+                                                {project.title}
+                                            </h3>
+                                            <p className="text-xs font-semibold text-primary/90 mb-3 flex items-center gap-1.5">
+                                                <i className="fa-solid fa-user-gear text-[10px]"></i> Role: {project.role}
+                                            </p>
+                                            <p className="text-slate-400 text-sm leading-relaxed line-clamp-2 mb-4">
+                                                {project.description}
+                                            </p>
                                         </div>
                                     </div>
-                                    <div className="p-6">
-                                        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
-                                        <div className="flex flex-wrap gap-2">
-                                            {project.tags.map((tag, i) => (
-                                                <span key={i} className="text-[10px] uppercase text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded-md">{tag}</span>
+
+                                    <div className="px-6 pb-6 pt-0 border-t border-white/5 mt-auto pt-4 flex justify-between items-center">
+                                        <div className="flex flex-wrap gap-1.5">
+                                            {project.tags.slice(0, 3).map((tag, i) => (
+                                                <span key={i} className="text-[10px] font-medium text-slate-300 bg-white/5 border border-white/10 px-2.5 py-0.5 rounded-md">
+                                                    {tag}
+                                                </span>
                                             ))}
+                                            {project.tags.length > 3 && (
+                                                <span className="text-[10px] text-slate-400 font-medium px-1.5 py-0.5">+{project.tags.length - 3}</span>
+                                            )}
                                         </div>
+                                        <span className="text-xs font-semibold text-primary group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                                            Detail <i className="fa-solid fa-arrow-right text-[10px]"></i>
+                                        </span>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    {/* MODAL GALLERY */}
+                    {/* MODAL DETAIL PROJECT (SPLIT VIEW) */}
                     {selectedProject && (
-                        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md p-4 animate-fadeIn">
-                            <button onClick={() => setSelectedProject(null)} className="absolute top-6 right-6 text-white text-3xl hover:text-primary">&times;</button>
+                        <div
+                            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-6 animate-fadeIn"
+                            onClick={closeProjectModal}
+                        >
+                            <div
+                                className="relative max-w-6xl w-full glass-card bg-slate-900 rounded-2xl overflow-hidden border border-white/10 shadow-2xl max-h-[90vh] flex flex-col lg:flex-row"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                {/* Close Button */}
+                                <button
+                                    onClick={closeProjectModal}
+                                    className="absolute top-4 right-4 z-30 text-slate-400 hover:text-white text-xl w-9 h-9 rounded-full glass flex items-center justify-center transition-colors"
+                                    aria-label="Tutup Detail Proyek"
+                                >
+                                    &times;
+                                </button>
 
-                            <div className="relative max-w-5xl w-full flex items-center justify-center">
-                                {selectedProject.gallery.length > 1 && (
-                                    <button onClick={prevImg} className="absolute left-0 z-10 p-4 text-white hover:text-primary text-4xl bg-black/20 rounded-full">‹</button>
-                                )}
+                                {/* KIRI: GALLERY SLIDESHOW */}
+                                <div className="lg:w-7/12 p-6 bg-slate-950 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 overflow-y-auto">
+                                    <div className="relative group flex-1 flex items-center justify-center min-h-[280px] sm:min-h-[360px] bg-slate-900/60 rounded-xl overflow-hidden border border-white/5">
+                                        <img
+                                            src={selectedProject.gallery[currentImgIndex]}
+                                            alt={`${selectedProject.title} screenshot ${currentImgIndex + 1}`}
+                                            className="max-h-[60vh] w-auto object-contain rounded-lg shadow-lg"
+                                        />
 
-                                <div className="text-center">
-                                    <img src={selectedProject.gallery[currentImgIndex]} className="max-h-[80vh] mx-auto rounded-lg shadow-2xl border border-white/10" alt="Gallery item" />
-                                    <p className="text-slate-400 mt-4 text-sm">Gambar {currentImgIndex + 1} dari {selectedProject.gallery.length}</p>
+                                        {selectedProject.gallery.length > 1 && (
+                                            <>
+                                                <button
+                                                    onClick={prevImg}
+                                                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 text-white hover:bg-primary flex items-center justify-center transition-colors text-xl z-10 shadow-md"
+                                                    aria-label="Gambar Sebelumnya"
+                                                >
+                                                    ‹
+                                                </button>
+                                                <button
+                                                    onClick={nextImg}
+                                                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 text-white hover:bg-primary flex items-center justify-center transition-colors text-xl z-10 shadow-md"
+                                                    aria-label="Gambar Selanjutnya"
+                                                >
+                                                    ›
+                                                </button>
+                                            </>
+                                        )}
+                                    </div>
+
+                                    {/* Image Counter & Thumbnail Bar */}
+                                    <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-white/10">
+                                        <span className="text-xs font-semibold text-slate-400">
+                                            Gambar <span className="text-white">{currentImgIndex + 1}</span> dari <span className="text-white">{selectedProject.gallery.length}</span>
+                                        </span>
+
+                                        <div className="flex gap-1.5 overflow-x-auto max-w-full py-1">
+                                            {selectedProject.gallery.map((img, idx) => (
+                                                <button
+                                                    key={idx}
+                                                    onClick={() => setCurrentImgIndex(idx)}
+                                                    className={`w-10 h-7 rounded overflow-hidden border transition-all shrink-0 ${idx === currentImgIndex ? 'border-primary ring-2 ring-primary/40' : 'border-white/10 opacity-50 hover:opacity-100'}`}
+                                                >
+                                                    <img src={img} alt={`thumb ${idx}`} className="w-full h-full object-cover" />
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
 
-                                {selectedProject.gallery.length > 1 && (
-                                    <button onClick={nextImg} className="absolute right-0 z-10 p-4 text-white hover:text-primary text-4xl bg-black/20 rounded-full">›</button>
-                                )}
+                                {/* KANAN: PROJECT INFORMATION & RESPONSIBILITIES */}
+                                <div className="lg:w-5/12 p-6 md:p-8 flex flex-col justify-between overflow-y-auto space-y-6">
+                                    <div>
+                                        <div className="flex items-center gap-2 mb-3">
+                                            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/20 text-primary border border-primary/30">
+                                                {selectedProject.category}
+                                            </span>
+                                        </div>
+
+                                        <h3 className="text-2xl font-bold font-heading text-white mb-2 leading-snug">
+                                            {selectedProject.title}
+                                        </h3>
+
+                                        <div className="p-3 rounded-xl bg-slate-800/80 border border-white/5 mb-5 flex items-center gap-2 text-xs font-semibold text-emerald-400">
+                                            <i className="fa-solid fa-user-check text-sm"></i>
+                                            <span>Role: {selectedProject.role}</span>
+                                        </div>
+
+                                        <div className="space-y-4">
+                                            <div>
+                                                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Deskripsi Proyek:</h4>
+                                                <p className="text-slate-300 text-sm leading-relaxed">
+                                                    {selectedProject.description}
+                                                </p>
+                                            </div>
+
+                                            <div>
+                                                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Kontribusi & Tanggung Jawab:</h4>
+                                                <p className="text-slate-300 text-sm leading-relaxed bg-slate-950/40 p-3.5 rounded-xl border border-white/5">
+                                                    {selectedProject.contribution}
+                                                </p>
+                                            </div>
+
+                                            <div>
+                                                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Teknologi Digunakan:</h4>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {selectedProject.tags.map((tag, i) => (
+                                                        <span key={i} className="px-3 py-1 rounded-lg text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                                                            {tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Action Buttons (Shows only if link available) */}
+                                    <div className="pt-4 border-t border-white/10 flex flex-wrap gap-3">
+                                        {selectedProject.github ? (
+                                            <a
+                                                href={selectedProject.github}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="px-5 py-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-white font-medium text-xs flex items-center gap-2 border border-white/10"
+                                            >
+                                                <i className="fa-brands fa-github text-sm"></i> Source Code
+                                            </a>
+                                        ) : null}
+
+                                        {selectedProject.demo ? (
+                                            <a
+                                                href={selectedProject.demo}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="px-5 py-2.5 rounded-full bg-primary hover:bg-indigo-600 text-white font-medium text-xs flex items-center gap-2 shadow-lg shadow-indigo-500/30"
+                                            >
+                                                <i className="fa-solid fa-arrow-up-right-from-square text-xs"></i> Live Demo
+                                            </a>
+                                        ) : null}
+
+                                        <button
+                                            onClick={closeProjectModal}
+                                            className="px-6 py-2.5 rounded-full glass border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-all text-xs font-medium ml-auto"
+                                        >
+                                            Tutup Modal
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     )}
@@ -901,29 +1499,506 @@
             );
         };
 
+        // --- COMPONENT: CERTIFICATES ---
+        const Certificates = ({ onOpenModal }) => {
+            const [selectedCategory, setSelectedCategory] = useState("Semua");
+            const [selectedCert, setSelectedCert] = useState(null);
+            const [certIndex, setCertIndex] = useState(0);
+
+            const certData = [
+                {
+                    title: "MikroTik Certified Network Associate (MTCNA)",
+                    issuer: "MikroTik Academy",
+                    year: "2025",
+                    category: "Sertifikasi Technical",
+                    image: "./images/sertifikat/SERTIFIKAT-MTCNA.png",
+                    pdf: "./images/sertifikat/SERTIFIKAT-MTCNA.pdf",
+                    desc: "Sertifikasi internasional keahlian jaringan komputer, konfigurasi router MikroTik, routing, firewall, bandwidth management, dan wireless networking."
+                },
+                {
+                    title: "Intermediate Assistant Web Developer",
+                    issuer: "Vocational Bootcamp - PNC",
+                    year: "2025",
+                    category: "Sertifikasi Technical",
+                    image: "./images/sertifikat/Sertifikat_Intermediate Assistant Web Developer - VBL - Politeknik Negeri Cilacap.png",
+                    pdf: "./images/sertifikat/Sertifikat_Intermediate Assistant Web Developer - VBL - Politeknik Negeri Cilacap.pdf",
+                    desc: "Sertifikasi keahlian tingkat lanjut pengembangan aplikasi web modern, arsitektur MVC, pengelolaan relasi basis data, dan integrasi modul backend."
+                },
+                {
+                    title: "Fundamental of Assistant Web Developer",
+                    issuer: "Vocational Bootcamp - PNC",
+                    year: "2024",
+                    category: "Sertifikasi Technical",
+                    image: "./images/sertifikat/Sertifikat_Fundamental of Assistant Web Developer - VBL - Politeknik Negeri Cilacap.png",
+                    pdf: "./images/sertifikat/Sertifikat_Fundamental of Assistant Web Developer - VBL - Politeknik Negeri Cilacap.pdf",
+                    desc: "Sertifikasi dasar-dasar pemrograman web, struktur HTML5, styling CSS3, logika pemrograman JavaScript, dan algoritma dasar."
+                },
+                {
+                    title: "Panitia Duta Kampus Politeknik Negeri Cilacap 2026",
+                    issuer: "BEM PNC | Divisi Media",
+                    year: "2026",
+                    category: "Kepanitiaan & Program",
+                    image: "./images/sertifikat/Sertifikat-DUTKAM26.png",
+                    pdf: "./images/sertifikat/Sertifikat-DUTKAM26.pdf",
+                    desc: "Sertifikat kepanitiaan dan partisipasi aktif divisi media dalam penyelenggaraan program kerja Badan Eksekutif Mahasiswa Pemilihan Duta Kampus PNC 2026."
+                },
+                {
+                    title: "Panitia Forumpuan Bicara",
+                    issuer: "BEM PNC | Divisi Media",
+                    year: "2025",
+                    category: "Kepanitiaan & Program",
+                    image: "./images/sertifikat/Sertifikat-FORUMPUAN.png",
+                    pdf: "./images/sertifikat/Sertifikat-FORUMPUAN.pdf",
+                    desc: "Sertifikat kepanitiaan dan partisipasi aktif divisi media dalam penyelenggaraan program kerja Badan Eksekutif Mahasiswa Forumpuan Bicara."
+                },
+                {
+                    title: "Panitia Mogerak",
+                    issuer: "BEM PNC | Divisi Acara",
+                    year: "2025",
+                    category: "Kepanitiaan & Program",
+                    image: "./images/sertifikat/Sertifikat-MOGERAK.png",
+                    pdf: "./images/sertifikat/Sertifikat-MOGERAK.pdf",
+                    desc: "Sertifikat kepanitiaan dan partisipasi aktif dalam penyelenggaraan program kerja Badan Eksekutif Mahasiswa Mogerak PNC."
+                },
+                {
+                    title: "Pengantar Mindset Digital 1",
+                    issuer: "Pelatihan Digital",
+                    year: "2024",
+                    category: "Sertifikasi Technical",
+                    image: "./images/sertifikat/Sertifikat_Pengantar Mindset Digital 1 _ Mengubah Masa Depan Anda Dengan Pola Pikir Digital.png",
+                    pdf: "./images/sertifikat/Sertifikat_Pengantar Mindset Digital 1 _ Mengubah Masa Depan Anda Dengan Pola Pikir Digital.pdf",
+                    desc: "Sertifikat kompetensi pemahaman transformasi digital, pola pikir inovatif, dan adaptasi teknologi di era digital."
+                }
+            ];
+
+            const categories = ["Semua", "Sertifikasi Technical", "Kepanitiaan & Program"];
+
+            const filteredCertificates = selectedCategory === "Semua"
+                ? certData
+                : certData.filter(cert => cert.category === selectedCategory);
+
+            const openCertModal = (cert, index) => {
+                setSelectedCert(cert);
+                setCertIndex(index);
+                onOpenModal(true);
+            };
+
+            const closeCertModal = () => {
+                setSelectedCert(null);
+                onOpenModal(false);
+            };
+
+            const nextCert = () => {
+                const nextIdx = (certIndex + 1) % filteredCertificates.length;
+                setCertIndex(nextIdx);
+                setSelectedCert(filteredCertificates[nextIdx]);
+            };
+
+            const prevCert = () => {
+                const prevIdx = (certIndex - 1 + filteredCertificates.length) % filteredCertificates.length;
+                setCertIndex(prevIdx);
+                setSelectedCert(filteredCertificates[prevIdx]);
+            };
+
+            // Keyboard Escape Listener
+            useEffect(() => {
+                const handleKeyDown = (e) => {
+                    if (e.key === 'Escape' && selectedCert) {
+                        closeCertModal();
+                    }
+                };
+                window.addEventListener('keydown', handleKeyDown);
+                return () => window.removeEventListener('keydown', handleKeyDown);
+            }, [selectedCert]);
+
+            return (
+                <section id="certificates" className="py-24 relative bg-slate-900/50 border-t border-white/5">
+                    <div className="container mx-auto px-6 md:px-12">
+                        <div className="text-center mb-16">
+                            <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mb-4">
+                                Sertifikat & <span className="gradient-text">Kepanitiaan</span>
+                            </h2>
+                            <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-8"></div>
+                            <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base">
+                                Dokumentasi lisensi keahlian teknis, pelatihan profesional, serta pengalaman kepanitiaan organisasi.
+                            </p>
+
+                            {/* Category Filter Pills */}
+                            <div className="flex flex-wrap justify-center gap-3 mt-8">
+                                {categories.map((cat) => (
+                                    <button
+                                        key={cat}
+                                        onClick={() => setSelectedCategory(cat)}
+                                        className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${selectedCategory === cat
+                                            ? 'bg-primary text-white shadow-[0_0_15px_rgba(79,70,229,0.5)] scale-105'
+                                            : 'glass border border-white/10 text-slate-400 hover:text-white hover:bg-white/10'
+                                            }`}
+                                    >
+                                        {cat}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Certificate Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {filteredCertificates.map((cert, index) => (
+                                <div
+                                    key={index}
+                                    className="glass-card rounded-2xl overflow-hidden group cursor-pointer hover:-translate-y-2 transition-all duration-300 border border-white/5 hover:border-primary/40 shadow-xl flex flex-col justify-between"
+                                    onClick={() => openCertModal(cert, index)}
+                                >
+                                    <div>
+                                        <div className="relative h-52 overflow-hidden bg-slate-950">
+                                            <img
+                                                src={cert.image}
+                                                alt={`Sertifikat ${cert.title}`}
+                                                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                                                loading="lazy"
+                                            />
+                                            <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                                                <span className="text-white font-medium bg-primary/80 px-4 py-2 rounded-full text-xs tracking-wider shadow-lg flex items-center gap-2">
+                                                    <i className="fa-solid fa-expand"></i> Pratinjau Sertifikat
+                                                </span>
+                                            </div>
+                                            <span className="absolute top-3 right-3 text-xs font-semibold px-3 py-1 rounded-full bg-slate-900/90 text-primary border border-primary/30 shadow-sm backdrop-blur-md">
+                                                {cert.year}
+                                            </span>
+                                        </div>
+
+                                        <div className="p-6">
+                                            <div className="text-xs font-semibold text-emerald-400 mb-2 flex items-center gap-1.5">
+                                                <i className="fa-solid fa-award"></i>
+                                                <span>{cert.issuer}</span>
+                                            </div>
+                                            <h3 className="text-lg font-bold text-white mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                                                {cert.title}
+                                            </h3>
+                                            <p className="text-slate-400 text-sm leading-relaxed line-clamp-2 mb-4">
+                                                {cert.desc}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="px-6 pb-6 pt-0 flex justify-between items-center text-xs text-slate-400 border-t border-white/5 mt-auto pt-4">
+                                        <span className="bg-primary/10 text-primary px-2.5 py-1 rounded-md border border-primary/20 font-semibold text-[10px] uppercase">
+                                            {cert.category}
+                                        </span>
+                                        <span className="group-hover:text-primary transition-colors flex items-center gap-1 font-semibold text-slate-300">
+                                            Detail <i className="fa-solid fa-arrow-right text-[10px]"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* MODAL CERTIFICATE PREVIEW */}
+                    {selectedCert && (
+                        <div
+                            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-6 animate-fadeIn"
+                            onClick={closeCertModal}
+                        >
+                            <div
+                                className="relative max-w-4xl w-full glass-card bg-slate-900 rounded-2xl overflow-hidden border border-white/10 shadow-2xl p-6 md:p-8 max-h-[90vh] overflow-y-auto"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                <button
+                                    onClick={closeCertModal}
+                                    className="absolute top-4 right-4 text-slate-400 hover:text-white text-2xl w-10 h-10 rounded-full glass flex items-center justify-center transition-colors z-20"
+                                    aria-label="Tutup Pratinjau Sertifikat"
+                                >
+                                    &times;
+                                </button>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                                    {/* Left Image Box */}
+                                    <div className="relative group rounded-xl overflow-hidden bg-slate-950 border border-white/10 flex items-center justify-center p-2 min-h-[250px]">
+                                        <img
+                                            src={selectedCert.image}
+                                            alt={selectedCert.title}
+                                            className="w-full max-h-[55vh] object-contain rounded-lg"
+                                        />
+
+                                        {filteredCertificates.length > 1 && (
+                                            <>
+                                                <button
+                                                    onClick={prevCert}
+                                                    className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 text-white hover:bg-primary flex items-center justify-center transition-colors text-xl shadow-lg"
+                                                    aria-label="Sertifikat Sebelumnya"
+                                                >
+                                                    ‹
+                                                </button>
+                                                <button
+                                                    onClick={nextCert}
+                                                    className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 text-white hover:bg-primary flex items-center justify-center transition-colors text-xl shadow-lg"
+                                                    aria-label="Sertifikat Selanjutnya"
+                                                >
+                                                    ›
+                                                </button>
+                                            </>
+                                        )}
+                                    </div>
+
+                                    {/* Right Info Box */}
+                                    <div className="flex flex-col justify-between space-y-6">
+                                        <div>
+                                            <div className="flex items-center gap-3 mb-3">
+                                                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/20 text-primary border border-primary/30">
+                                                    {selectedCert.category}
+                                                </span>
+                                                <span className="text-xs text-slate-400 font-medium">
+                                                    <i className="fa-regular fa-calendar-alt mr-1"></i> {selectedCert.year}
+                                                </span>
+                                            </div>
+
+                                            <h3 className="text-xl md:text-2xl font-bold font-heading text-white mb-2 leading-snug">
+                                                {selectedCert.title}
+                                            </h3>
+                                            <p className="text-emerald-400 font-semibold text-sm mb-4">
+                                                <i className="fa-solid fa-award mr-1.5"></i> Penerbit: {selectedCert.issuer}
+                                            </p>
+                                            <p className="text-slate-300 text-sm leading-relaxed bg-slate-950/60 p-4 rounded-xl border border-white/5">
+                                                {selectedCert.desc}
+                                            </p>
+                                        </div>
+
+                                        <div className="flex flex-wrap gap-3 pt-2">
+                                            {/* Link dokumen PDF */}
+                                            <a
+                                                href={selectedCert.pdf}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="px-6 py-2.5 rounded-full bg-primary hover:bg-indigo-600 text-white font-medium text-xs flex items-center gap-2 shadow-lg shadow-indigo-600/30 transition-all"
+                                            >
+                                                <i className="fa-solid fa-file-pdf"></i> Buka Dokumen PDF
+                                            </a>
+                                            <button
+                                                onClick={closeCertModal}
+                                                className="px-6 py-2.5 rounded-full glass border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-all text-xs font-medium"
+                                            >
+                                                Tutup
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </section>
+            );
+        };
+
+        // --- COMPONENT: CONTACT ---
+        const Contact = () => {
+            const contactCards = [
+                {
+                    title: "Email",
+                    // NOTE: Silakan ubah email jika ada email utama pilihan Anda
+                    value: "itsneinfah21@gmail.com",
+                    link: "mailto:itsneinfah21@gmail.com",
+                    icon: "fa-solid fa-envelope text-blue-400",
+                    actionText: "Kirim Email",
+                    badge: "Resmi"
+                },
+                {
+                    title: "WhatsApp",
+                    // NOTE: Ganti link wa.me dengan nomor WhatsApp asli Anda saat siap
+                    value: "+62 896-3035-0450",
+                    link: "https://wa.me/6289630350450",
+                    icon: "fa-brands fa-whatsapp text-emerald-400",
+                    actionText: "Chat WhatsApp",
+                    badge: "Fast Response"
+                },
+                {
+                    title: "LinkedIn",
+                    value: "Itsneinfah Nur Iffatun",
+                    link: "https://www.linkedin.com/in/itsneiinr/",
+                    icon: "fa-brands fa-linkedin text-cyan-400",
+                    actionText: "Lihat Profil",
+                    badge: "Profesional"
+                },
+                {
+                    title: "GitHub",
+                    value: "itsneiinr",
+                    link: "https://github.com/itsneiinr",
+                    icon: "fa-brands fa-github text-purple-400",
+                    actionText: "Lihat Repositori",
+                    badge: "Code Repos"
+                }
+            ];
+
+            return (
+                <section id="contact" className="py-24 relative bg-slate-950">
+                    <div className="container mx-auto px-6 md:px-12">
+                        <div className="text-center mb-16">
+                            <h2 className="text-3xl md:text-4xl font-bold font-heading text-white mb-4">
+                                Let's Work <span className="gradient-text">Together</span>
+                            </h2>
+                            <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-6"></div>
+                            <p className="text-slate-300 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+                                Jika Anda tertarik untuk bekerja sama, berdiskusi mengenai project, posisi magang/internship, atau peluang kerja lainnya, silakan hubungi saya.
+                            </p>
+                        </div>
+
+                        {/* Contact Cards Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-16">
+                            {contactCards.map((item, idx) => (
+                                <a
+                                    key={idx}
+                                    href={item.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="glass-card p-6 rounded-2xl border border-white/5 hover:border-primary/40 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between shadow-xl group"
+                                >
+                                    <div>
+                                        <div className="flex justify-between items-center mb-4">
+                                            <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-xl group-hover:scale-110 transition-transform border border-white/10">
+                                                <i className={item.icon}></i>
+                                            </div>
+                                            <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
+                                                {item.badge}
+                                            </span>
+                                        </div>
+                                        <h3 className="text-lg font-bold text-white mb-1">{item.title}</h3>
+                                        <p className="text-slate-400 text-xs truncate mb-4 font-mono">{item.value}</p>
+                                    </div>
+
+                                    <div className="text-xs font-semibold text-primary group-hover:text-white flex items-center gap-1.5 transition-colors pt-3 border-t border-white/5">
+                                        <span>{item.actionText}</span>
+                                        <i className="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
+
+                        {/* Bottom Banner & CTAs */}
+                        <div className="glass-card rounded-3xl p-8 md:p-12 text-center max-w-4xl mx-auto border border-white/10 relative overflow-hidden shadow-2xl">
+                            <div className="absolute -top-12 -right-12 w-48 h-48 bg-primary/20 rounded-full blur-3xl pointer-events-none"></div>
+                            <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                            <h3 className="text-2xl md:text-3xl font-bold font-heading text-white mb-4">
+                                Siap untuk Memulai Kolaborasi?
+                            </h3>
+                            <p className="text-slate-300 text-sm md:text-base max-w-xl mx-auto mb-8 leading-relaxed">
+                                Terbuka untuk diskusi proyek web development, pembuatan antarmuka UI/UX, maupun kesempatan magang industri.
+                            </p>
+
+                            <div className="flex flex-wrap justify-center gap-4">
+                                <a
+                                    href="mailto:itsneinfah.nur@gmail.com"
+                                    className="px-8 py-3 rounded-full bg-primary hover:bg-indigo-600 text-white text-sm font-semibold transition-all shadow-[0_4px_20px_rgba(79,70,229,0.4)] flex items-center gap-2"
+                                >
+                                    <i className="fa-solid fa-paper-plane"></i> Hubungi Saya
+                                </a>
+                                {/* Path CV Placeholder */}
+                                <a
+                                    href="./cv.pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-8 py-3 rounded-full glass border border-white/15 text-white text-sm font-semibold hover:bg-white/10 transition-all flex items-center gap-2"
+                                >
+                                    <i className="fa-solid fa-download"></i> Download CV
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // --- COMPONENT: FOOTER ---
         const Footer = () => {
             return (
-                <footer className="py-8 border-t border-white/10 bg-slate-900">
-                    <div className="container mx-auto px-6 text-center">
-                        <p className="text-slate-500 text-sm">
-                            © {new Date().getFullYear()} Itsneinfah Nur Iffatun
-                        </p>
+                <footer className="py-12 bg-slate-950 border-t border-white/10 relative">
+                    <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div className="text-center md:text-left">
+                            <a href="#home" className="text-xl font-heading font-bold text-white tracking-wider">
+                                Itsneinfah Nur Iffatun<span className="text-primary">.</span>
+                            </a>
+                            <p className="text-xs text-slate-400 mt-1">
+                                Mahasiswa Teknik Informatika & Full-Stack Developer
+                            </p>
+                        </div>
+
+                        {/* Social Links */}
+                        <div className="flex items-center gap-4">
+                            <a
+                                href="https://github.com/itsneiinr"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-9 h-9 rounded-full glass flex items-center justify-center text-slate-400 hover:text-white hover:bg-primary transition-all text-sm"
+                                aria-label="GitHub Profile"
+                            >
+                                <i className="fa-brands fa-github"></i>
+                            </a>
+                            <a
+                                href="https://www.linkedin.com/in/itsneiinr/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-9 h-9 rounded-full glass flex items-center justify-center text-slate-400 hover:text-white hover:bg-primary transition-all text-sm"
+                                aria-label="LinkedIn Profile"
+                            >
+                                <i className="fa-brands fa-linkedin"></i>
+                            </a>
+                            <a
+                                href="https://www.instagram.com/itsneiinr"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-9 h-9 rounded-full glass flex items-center justify-center text-slate-400 hover:text-white hover:bg-primary transition-all text-sm"
+                                aria-label="Instagram Profile"
+                            >
+                                <i className="fa-brands fa-instagram"></i>
+                            </a>
+                        </div>
+
+                        {/* Copyright & Back to Top */}
+                        <div className="flex items-center gap-4">
+                            <p className="text-xs text-slate-500">
+                                © {new Date().getFullYear()} Itsneinfah Nur Iffatun. All rights reserved.
+                            </p>
+
+                            <a
+                                href="#home"
+                                className="w-9 h-9 rounded-full bg-primary/20 hover:bg-primary border border-primary/30 text-white flex items-center justify-center transition-all text-xs"
+                                title="Kembali ke atas"
+                                aria-label="Kembali ke atas"
+                            >
+                                <i className="fa-solid fa-arrow-up"></i>
+                            </a>
+                        </div>
                     </div>
                 </footer>
             );
         };
 
+        // --- MAIN APP COMPONENT ---
         const App = () => {
+            const [isModalOpen, setIsModalOpen] = useState(false);
+
+            // Control body scroll lock when modal opens
+            const handleModalState = useCallback((isOpen) => {
+                setIsModalOpen(isOpen);
+                if (isOpen) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = 'unset';
+                }
+            }, []);
+
             return (
-                <div className="min-h-screen bg-slate-950 text-slate-100">
+                <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-primary selection:text-white">
                     <Navbar />
                     <main>
                         <Hero />
                         <About />
+                        <WhatIDo />
+                        <TechStack />
                         <Education />
-                        <Experience />
-                        <Certificates />
-                        <Projects />
+                        <Experience onOpenModal={handleModalState} />
+                        <Projects onOpenModal={handleModalState} />
+                        <Certificates onOpenModal={handleModalState} />
+                        <Contact />
                     </main>
                     <Footer />
                 </div>
