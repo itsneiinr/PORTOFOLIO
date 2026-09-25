@@ -160,6 +160,7 @@
                 return () => window.removeEventListener('scroll', handleScroll);
             }, []);
 
+
             const navLinks = [
                 { name: 'Home', href: '#home' },
                 { name: 'About', href: '#about' },
@@ -192,9 +193,10 @@
                             ))}
 
                             {/* Download CV CTA */}
-                            {/* NOTE: Gantilah file path './cv.pdf' jika Anda telah memiliki file CV PDF fisik */}
+                            {/* CV PDF */}
                             <a
-                                href="./cv.pdf"
+                                href="./asset/CV-Itsneinfah Nur Iffatun.pdf"
+                                download
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="px-4 py-2 rounded-full bg-primary/90 hover:bg-primary text-white text-xs font-semibold tracking-wide transition-all shadow-md hover:shadow-indigo-500/30 flex items-center gap-1.5 transform hover:-translate-y-0.5"
@@ -229,9 +231,10 @@
                                 </a>
                             ))}
                             <div className="pt-3 border-t border-white/10">
-                                {/* Path placeholder CV untuk mobile */}
+                                {/* CV PDF untuk mobile */}
                                 <a
-                                    href="./cv.pdf"
+                                    href="./asset/CV-Itsneinfah Nur Iffatun.pdf"
+                                    download
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     onClick={() => setIsOpen(false)}
@@ -279,9 +282,10 @@
                                 >
                                     <i className="fa-solid fa-code"></i> Lihat Proyek
                                 </a>
-                                {/* Placeholder link ke CV */}
+                                {/* Link ke CV PDF */}
                                 <a
-                                    href="./cv.pdf"
+                                    href="./asset/CV-Itsneinfah Nur Iffatun.pdf"
+                                    download
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="px-7 py-3 rounded-full glass border border-white/15 text-white text-sm font-semibold hover:bg-white/10 transition-all shadow-md transform hover:-translate-y-0.5 flex items-center gap-2"
@@ -661,10 +665,8 @@
         };
 
         // --- COMPONENT: EXPERIENCE ---
-        const Experience = ({ onOpenModal }) => {
+        const Experience = () => {
             const [mainPhotoIndex, setMainPhotoIndex] = useState(0);
-            const [selectedDesign, setSelectedDesign] = useState(null);
-            const [designIndex, setDesignIndex] = useState(0);
 
             const expData = {
                 year: "2025 — 2026",
@@ -702,70 +704,6 @@
                 ]
             };
 
-            // Dataset Karya Desain Terpilih (Dapat dengan mudah Anda perbarui path imagenya saat mengunggah file di images/organisasi/design/)
-            const designWorks = [
-                {
-                    id: "design-01",
-                    number: "01",
-                    title: "Visual Branding Kabinet & Feeds Media Sosial BEM",
-                    category: "Visual Branding & Feeds",
-                    year: "2025",
-                    image: "./images/organisasi/bem-1.png",
-                    description: "Perancangan identitas visual, panduan warna, dan template tata letak media sosial resmi Badan Eksekutif Mahasiswa Politeknik Negeri Cilacap.",
-                    tools: ["Figma", "Adobe Photoshop", "Canva"]
-                },
-                {
-                    id: "design-02",
-                    number: "02",
-                    title: "Infografis & Publikasi Berita Kampus Kominfo",
-                    category: "Information Design",
-                    year: "2025",
-                    image: "./images/organisasi/bem-2.png",
-                    description: "Desain penyederhanaan informasi kompleks berita kegiatan kampus menjadi infografis publikasi digital yang komunikatif dan menarik bagi mahasiswa.",
-                    tools: ["Figma", "Adobe Illustrator", "Canva"]
-                },
-                {
-                    id: "design-03",
-                    number: "03",
-                    title: "Poster & Asset Promosi Pemilihan Duta Kampus PNC 2026",
-                    category: "Event Promotion & Media",
-                    year: "2026",
-                    image: "./images/organisasi/bem-3.png",
-                    description: "Desain poster resmi, banner pendaftaran, dan feeds publikasi program kerja Duta Kampus Politeknik Negeri Cilacap 2026.",
-                    tools: ["Figma", "Adobe Photoshop"]
-                },
-                {
-                    id: "design-04",
-                    number: "04",
-                    title: "Media Kampanye & Poster Forumpuan Bicara",
-                    category: "Campaign & Publication",
-                    year: "2025",
-                    image: "./images/organisasi/bem-4.png",
-                    description: "Desain materi publikasi, poster digital, dan konten kampanye edukatif untuk program kerja Forumpuan Bicara BEM PNC.",
-                    tools: ["Figma", "Canva"]
-                },
-                {
-                    id: "design-05",
-                    number: "05",
-                    title: "Visual Media & Spanduk Event Mogerak PNC",
-                    category: "Graphic Design & Print Media",
-                    year: "2025",
-                    image: "./images/organisasi/bem-1.png",
-                    description: "Perancangan visual banner, spanduk fisik, cetak identitas panitia, serta e-poster publikasi event Mogerak Politeknik Negeri Cilacap.",
-                    tools: ["Figma", "Adobe Photoshop"]
-                },
-                {
-                    id: "design-06",
-                    number: "06",
-                    title: "Template Konten Digital & Story Departemen Kominfo",
-                    category: "Digital Content Creation",
-                    year: "2025",
-                    image: "./images/organisasi/bem-2.png",
-                    description: "Penyusunan modul template instagram story dan feed reels harian untuk mempercepat alur kerja publikasi media BEM PNC.",
-                    tools: ["Figma", "Canva"]
-                }
-            ];
-
             const getStackStyle = (index) => {
                 const isMain = index === mainPhotoIndex;
                 const totalPhotos = expData.photos.length;
@@ -793,40 +731,6 @@
                     };
                 }
             };
-
-            const openDesignModal = (item, index) => {
-                setSelectedDesign(item);
-                setDesignIndex(index);
-                if (onOpenModal) onOpenModal(true);
-            };
-
-            const closeDesignModal = () => {
-                setSelectedDesign(null);
-                if (onOpenModal) onOpenModal(false);
-            };
-
-            const nextDesign = () => {
-                const nextIdx = (designIndex + 1) % designWorks.length;
-                setDesignIndex(nextIdx);
-                setSelectedDesign(designWorks[nextIdx]);
-            };
-
-            const prevDesign = () => {
-                const prevIdx = (designIndex - 1 + designWorks.length) % designWorks.length;
-                setDesignIndex(prevIdx);
-                setSelectedDesign(designWorks[prevIdx]);
-            };
-
-            // Keyboard Escape Handler for Design Modal
-            useEffect(() => {
-                const handleKeyDown = (e) => {
-                    if (e.key === 'Escape' && selectedDesign) {
-                        closeDesignModal();
-                    }
-                };
-                window.addEventListener('keydown', handleKeyDown);
-                return () => window.removeEventListener('keydown', handleKeyDown);
-            }, [selectedDesign]);
 
             return (
                 <section id="experience" className="py-24 relative overflow-hidden bg-slate-900/50 border-t border-white/5">
@@ -935,182 +839,8 @@
                             </div>
                         </div>
 
-                        {/* SECTION DIVIDER */}
-                        <div className="w-full max-w-6xl mx-auto my-12 border-t border-white/10 relative">
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 glass px-4 py-1 rounded-full border border-white/10 text-xs font-semibold text-slate-400">
-                                <i className="fa-solid fa-pen-nib text-primary mr-1"></i> PORTFOLIO DESAIN KOMINFO
-                            </div>
-                        </div>
-
-                        {/* 3. BOTTOM BLOCK: KARYA DESAIN TERPILIH */}
-                        <div className="max-w-6xl mx-auto">
-                            <div className="text-center mb-12">
-                                <h3 className="text-2xl md:text-3xl font-bold font-heading text-white mb-2">
-                                    Karya Desain <span className="gradient-text">Terpilih</span>
-                                </h3>
-                                <p className="text-slate-400 text-sm max-w-xl mx-auto">
-                                    Beberapa karya desain yang saya buat selama berkontribusi di Departemen Kominfo BEM Politeknik Negeri Cilacap.
-                                </p>
-                            </div>
-
-                            {/* 6 Design Featured Cards Grid */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {designWorks.map((work, idx) => (
-                                    <div
-                                        key={work.id}
-                                        onClick={() => openDesignModal(work, idx)}
-                                        className="glass-card rounded-2xl overflow-hidden border border-white/5 hover:border-primary/40 shadow-xl transition-all duration-300 group cursor-pointer flex flex-col justify-between"
-                                    >
-                                        <div>
-                                            {/* Preview Image Box */}
-                                            <div className="relative h-48 overflow-hidden bg-slate-950">
-                                                <img
-                                                    src={work.image}
-                                                    alt={work.title}
-                                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                                    onError={(e) => { e.target.src = './images/organisasi/bem-1.png'; }}
-                                                    loading="lazy"
-                                                />
-                                                <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                                                    <span className="text-white font-semibold bg-primary/90 px-4 py-2 rounded-full text-xs tracking-wider shadow-lg flex items-center gap-2">
-                                                        <i className="fa-solid fa-expand"></i> View Design
-                                                    </span>
-                                                </div>
-                                                <span className="absolute top-3 left-3 text-xs font-bold font-mono px-2.5 py-0.5 rounded-md bg-slate-900/90 text-primary border border-primary/30">
-                                                    {work.number}
-                                                </span>
-                                            </div>
-
-                                            {/* Card Content */}
-                                            <div className="p-5">
-                                                <span className="text-[10px] font-semibold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 mb-2 inline-block">
-                                                    {work.category}
-                                                </span>
-                                                <h4 className="text-base font-bold text-white mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                                                    {work.title}
-                                                </h4>
-                                                <p className="text-slate-400 text-xs leading-relaxed line-clamp-2">
-                                                    {work.description}
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        {/* Card Footer */}
-                                        <div className="px-5 pb-5 pt-0 border-t border-white/5 mt-auto pt-3 flex justify-between items-center text-xs">
-                                            <div className="flex flex-wrap gap-1">
-                                                {work.tools.map((t, i) => (
-                                                    <span key={i} className="text-[10px] font-medium text-slate-300 bg-white/5 px-2 py-0.5 rounded">
-                                                        {t}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                            <span className="text-xs font-semibold text-primary group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                                                Detail <i className="fa-solid fa-arrow-right text-[10px]"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
                     </div>
 
-                    {/* 4. DESIGN PREVIEW LIGHTBOX MODAL */}
-                    {selectedDesign && (
-                        <div
-                            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-6 animate-fadeIn"
-                            onClick={closeDesignModal}
-                        >
-                            <div
-                                className="relative max-w-4xl w-full glass-card bg-slate-900 rounded-2xl overflow-hidden border border-white/10 shadow-2xl p-6 md:p-8 max-h-[90vh] overflow-y-auto"
-                                onClick={(e) => e.stopPropagation()}
-                            >
-                                {/* Close Button */}
-                                <button
-                                    onClick={closeDesignModal}
-                                    className="absolute top-4 right-4 text-slate-400 hover:text-white text-2xl w-10 h-10 rounded-full glass flex items-center justify-center transition-colors z-20"
-                                    aria-label="Tutup Pratinjau Desain"
-                                >
-                                    &times;
-                                </button>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                                    {/* Left Image Box */}
-                                    <div className="relative group rounded-xl overflow-hidden bg-slate-950 border border-white/10 flex items-center justify-center p-2 min-h-[260px]">
-                                        <img
-                                            src={selectedDesign.image}
-                                            alt={selectedDesign.title}
-                                            className="w-full max-h-[55vh] object-contain rounded-lg"
-                                            onError={(e) => { e.target.src = './images/organisasi/bem-1.png'; }}
-                                        />
-
-                                        {designWorks.length > 1 && (
-                                            <>
-                                                <button
-                                                    onClick={prevDesign}
-                                                    className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 text-white hover:bg-primary flex items-center justify-center transition-colors text-xl shadow-lg"
-                                                    aria-label="Desain Sebelumnya"
-                                                >
-                                                    ‹
-                                                </button>
-                                                <button
-                                                    onClick={nextDesign}
-                                                    className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 text-white hover:bg-primary flex items-center justify-center transition-colors text-xl shadow-lg"
-                                                    aria-label="Desain Selanjutnya"
-                                                >
-                                                    ›
-                                                </button>
-                                            </>
-                                        )}
-                                    </div>
-
-                                    {/* Right Info Box */}
-                                    <div className="flex flex-col justify-between space-y-6">
-                                        <div>
-                                            <div className="flex items-center gap-3 mb-3">
-                                                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/20 text-primary border border-primary/30">
-                                                    {selectedDesign.category}
-                                                </span>
-                                                <span className="text-xs text-slate-400 font-medium">
-                                                    <i className="fa-regular fa-calendar-alt mr-1"></i> {selectedDesign.year}
-                                                </span>
-                                                <span className="text-xs text-slate-500 font-mono ml-auto">
-                                                    Desain {designIndex + 1} dari {designWorks.length}
-                                                </span>
-                                            </div>
-
-                                            <h3 className="text-xl md:text-2xl font-bold font-heading text-white mb-2 leading-snug">
-                                                {selectedDesign.title}
-                                            </h3>
-
-                                            <p className="text-slate-300 text-sm leading-relaxed bg-slate-950/60 p-4 rounded-xl border border-white/5 mb-4">
-                                                {selectedDesign.description}
-                                            </p>
-
-                                            <div>
-                                                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Software / Tools:</h4>
-                                                <div className="flex flex-wrap gap-2">
-                                                    {selectedDesign.tools.map((t, i) => (
-                                                        <span key={i} className="px-3 py-1 rounded-lg text-xs font-medium bg-white/5 text-slate-200 border border-white/10">
-                                                            {t}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex justify-end pt-2 border-t border-white/10">
-                                            <button
-                                                onClick={closeDesignModal}
-                                                className="px-6 py-2.5 rounded-full glass border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-all text-xs font-medium"
-                                            >
-                                                Tutup Pratinjau
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
                 </section>
             );
         };
@@ -1561,6 +1291,15 @@
                     desc: "Sertifikat kepanitiaan dan partisipasi aktif dalam penyelenggaraan program kerja Badan Eksekutif Mahasiswa Mogerak PNC."
                 },
                 {
+                    title: "Sertifikat Dies Natalis",
+                    issuer: "Politeknik Negeri Cilacap",
+                    year: "2026",
+                    category: "Kepanitiaan & Program",
+                    image: "./images/sertifikat/Sertifikat-Itsneinfah Nur Iffatun-DIESNAT.jpg",
+                    pdf: "./images/sertifikat/Sertifikat-Itsneinfah Nur Iffatun-DIESNAT.jpg",
+                    desc: "Sertifikat partisipasi dalam kegiatan Dies Natalis Politeknik Negeri Cilacap."
+                },
+                {
                     title: "Pengantar Mindset Digital 1",
                     issuer: "Pelatihan Digital",
                     year: "2024",
@@ -1891,9 +1630,10 @@
                                 >
                                     <i className="fa-solid fa-paper-plane"></i> Hubungi Saya
                                 </a>
-                                {/* Path CV Placeholder */}
+                                {/* Link ke CV PDF */}
                                 <a
-                                    href="./cv.pdf"
+                                    href="./asset/CV-Itsneinfah Nur Iffatun.pdf"
+                                    download
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="px-8 py-3 rounded-full glass border border-white/15 text-white text-sm font-semibold hover:bg-white/10 transition-all flex items-center gap-2"
@@ -1995,7 +1735,7 @@
                         <WhatIDo />
                         <TechStack />
                         <Education />
-                        <Experience onOpenModal={handleModalState} />
+                        <Experience />
                         <Projects onOpenModal={handleModalState} />
                         <Certificates onOpenModal={handleModalState} />
                         <Contact />
